@@ -1,0 +1,101 @@
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * p p p p p p p p p p p p p p F F I I p p p p p p p p p p p p p p p p p p p * * * * * *
+* * * * * * p p p p p p p p p p p p p p p F F I I p p p p p p p p p p p p p p p p p p p p * * * * *
+* * * * * p p p p p p p p p p p p p p p p F F I I p p p p p p p p p p p p p p p p p p p p p * * * *
+* * * * p p p p p p p p p p p p p p p p p F F I I p p p p p p p p p p p p p p p p p p p p p p * * *
+* * * p p p p p p p p p p p p p p p p p p F F I I p p p p p p p p p p p p p p p p p p p p p p p * *
+* * * p p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p * *
+* * * p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p p * *
+* * * p p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p p p * *
+* * * * p p p p p p p p p p p * * * * * * * * * * * * * * * * * * * * * p p p p p p p p p p p p * *
+* * * * * p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p * * *
+* * * * * * p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p * * * *
+* * * * * * * p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p * * * * *
+* * * * * * * * p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p * * * * * *
+* * * * * * * * * p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p p * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+matrice 25x50
+
+
+/* Classe per la pulizia degli spazi del circuito sopra.
+package it.unicam.cs.formula1Classes;
+
+  import java.io.BufferedReader;
+  import java.io.FileReader;
+  import java.io.IOException;
+
+  public class CircuitCleaner {
+
+      // Metodo per rimuovere spazi da ogni linea e stamparle sulla console
+      public void cleanAndPrintCircuitFile(String inputFilePath) {
+          BufferedReader reader = null;
+
+          try {
+              reader = new BufferedReader(new FileReader(inputFilePath));
+
+              String line;
+              while ((line = reader.readLine()) != null) {
+                  // Rimuove tutti gli spazi dalla linea
+                  String cleanedLine = line.replace(" ", "");
+                  // Stampa la linea pulita sulla console
+                  System.out.println(cleanedLine);
+              }
+          } catch (IOException e) {
+              e.printStackTrace();
+          } finally {
+              try {
+                  if (reader != null) {
+                      reader.close();
+                  }
+              } catch (IOException ex) {
+                  ex.printStackTrace();
+              }
+          }
+      }
+
+      // Metodo principale per eseguire il programma
+      public static void main(String[] args) {
+          // Inserisci qui il percorso del file di input
+          String inputFilePath = "api/src/main/resources/track.txt";
+
+          CircuitCleaner cleaner = new CircuitCleaner();
+          cleaner.cleanAndPrintCircuitFile(inputFilePath);
+      }
+  }
+  */
+  **************************************************
+  **************************************************
+  *******ppppppppppppppFFIIppppppppppppppppppp******
+  ******pppppppppppppppFFIIpppppppppppppppppppp*****
+  *****ppppppppppppppppFFIIppppppppppppppppppppp****
+  ****pppppppppppppppppFFIIpppppppppppppppppppppp***
+  ***ppppppppppppppppppFFIIppppppppppppppppppppppp**
+  ***ppppppppppp************************pppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp**************************ppppppppp**
+  ***pppppppppp*************************pppppppppp**
+  ***ppppppppppp***********************ppppppppppp**
+  ****ppppppppppp*********************pppppppppppp**
+  *****pppppppppppppppppppppppppppppppppppppppppp***
+  ******pppppppppppppppppppppppppppppppppppppppp****
+  *******pppppppppppppppppppppppppppppppppppppp*****
+  ********pppppppppppppppppppppppppppppppppppp******
+  *********pppppppppppppppppppppppppppppppppp*******
+  **************************************************
+  **************************************************

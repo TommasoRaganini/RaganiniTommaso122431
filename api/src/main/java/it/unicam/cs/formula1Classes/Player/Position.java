@@ -21,38 +21,70 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package it.unicam.cs.formula1Classes;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+package it.unicam.cs.formula1Classes.Player;
+/**
+ * This class represents the position of the car in the track
+ */
+public class Position {
+    private int x;
+    private int y;
 
-public class FIleIOtrack {
-
-
-    public static List<String> leggiFile() {
-        List<String> lines = new ArrayList<>();
-        try {
-            System.out.println("Reading file from: " + Paths.get("api/src/main/resources/track.txt").toAbsolutePath());
-            lines = Files.readAllLines(Paths.get("api/src/main/resources/track.txt"));
-            System.out.println("File read successfully. Number of lines: " + lines.size());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lines;
+    public Position(int y, int x) {
+        this.y = y;
+        this.x = x;
     }
 
-    public static String[][] generateTrack() {
-        List<String> lines = leggiFile();
-        String[][] track = new String[lines.size()][];
-        for (int i = 0; i < lines.size(); i++) {
-            track[i] = lines.get(i).split(" ");
-        }
-        return track;
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
     }
+
+    /**
+     * @param x the x to set
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @param y the y to set
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Position other))
+            return false;
+        return y == other.y && x == other.x;
+    }
+
+    @Override
+    public String toString() {
+        return "Position [y=" + y + ", x=" + x + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + x;
+        result = prime * result + y;
+        return result;
+    }
+
 
 }
-
-

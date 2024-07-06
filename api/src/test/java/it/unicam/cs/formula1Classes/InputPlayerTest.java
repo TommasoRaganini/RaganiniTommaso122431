@@ -24,41 +24,37 @@
 
 package it.unicam.cs.formula1Classes;
 
-import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
+import it.unicam.cs.formula1Classes.GameEngine.GameChecker;
+import it.unicam.cs.formula1Classes.InputOutput.InputPlayer;
+import it.unicam.cs.formula1Classes.Player.Car;
+import it.unicam.cs.formula1Classes.Player.Controller;
+import it.unicam.cs.formula1Classes.Player.Directions;
+import it.unicam.cs.formula1Classes.Player.HumanPlayer;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FIleIOtrackTest {
+class InputPlayerTest {
 
     @Test
-    void readFile() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        List<String> lines = fIleIOtrack.readFile("track.txt");
-        assertNotNull(lines);
-        // Verifica che il file non sia vuoto
-        assertFalse(lines.isEmpty(), "Il file non dovrebbe essere vuoto.");
-      //  lines.forEach(System.out::println);
-        assertTrue(lines.contains("*************************" +
-                "*******************************************************"));
-        assertTrue(lines.contains("******ppppppppppppppppppppppppppppppp" +
-                "FSppppppppppppppppppppppppppppppppppp******"));
-
+    void getDirection() {
+        String input = "UP_RIGHT\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        InputPlayer inputPlayer = new InputPlayer(in);
+        Controller[] controllers = new Controller[]{new Controller(new HumanPlayer(new Car(2,44))),
+                new Controller(new HumanPlayer(new Car(3,44)))};
+        GameChecker gameChecker = new GameChecker(controllers);
+        assertEquals(Directions.UP_RIGHT, inputPlayer.getDirection(gameChecker.getValidMoves(controllers[0])));
     }
 
     @Test
-    void numPlayers() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        int i=0;
-        i = fIleIOtrack.getPlayersNumber();
-     //   assertEquals(1, i);
-
+    void getNumberOfPlayers() {
+        String input = "2\n";
+        InputStream in = new ByteArrayInputStream(input.getBytes());
+        InputPlayer inputPlayer = new InputPlayer(in);
+        assertEquals(2, inputPlayer.getNumberOfPlayers());
     }
-
-
-
-
 }

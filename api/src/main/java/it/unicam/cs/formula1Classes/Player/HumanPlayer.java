@@ -22,13 +22,33 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.Player;
 
-public class Car {
+import it.unicam.cs.formula1Classes.InputOutput.InputPlayer;
 
-Position position;
+import java.util.List;
 
+public class HumanPlayer implements Player {
+    private final Car car;
+    private static int id = 1;
+    private final int playerId = id++;
+    private final InputPlayer inputPlayer = new InputPlayer();
 
+    public HumanPlayer(Car car) {
+        this.car = car;
+    }
 
+    public Car getCar() {
+        return car;
+    }
 
+    @Override
+    public void move(List<Directions> moves) {
+        car.move(inputPlayer.getDirection(moves));
+    }
+
+    @Override
+    public String toString() {
+        return "Player" + playerId;
+    }
 }

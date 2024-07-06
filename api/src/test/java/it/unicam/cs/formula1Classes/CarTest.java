@@ -24,41 +24,30 @@
 
 package it.unicam.cs.formula1Classes;
 
-import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
+import it.unicam.cs.formula1Classes.Player.Car;
+import it.unicam.cs.formula1Classes.Player.Directions;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FIleIOtrackTest {
+class CarTest {
 
     @Test
-    void readFile() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        List<String> lines = fIleIOtrack.readFile("track.txt");
-        assertNotNull(lines);
-        // Verifica che il file non sia vuoto
-        assertFalse(lines.isEmpty(), "Il file non dovrebbe essere vuoto.");
-      //  lines.forEach(System.out::println);
-        assertTrue(lines.contains("*************************" +
-                "*******************************************************"));
-        assertTrue(lines.contains("******ppppppppppppppppppppppppppppppp" +
-                "FSppppppppppppppppppppppppppppppppppp******"));
+    void move() {
+        Car car = new Car(5,24);
+        car.move(Directions.RIGHT);
+        assertEquals(5, car.getCoordinates()[0]);
+        assertEquals(25, car.getCoordinates()[1]);
+        car.move(Directions.RIGHT);
+        assertEquals(5, car.getCoordinates()[0]);
+        assertEquals(27, car.getCoordinates()[1]);
+        car.move(Directions.DOWN_RIGHT);
+        assertEquals(6, car.getCoordinates()[0]);
+        assertEquals(30, car.getCoordinates()[1]);
+        car.move(Directions.DOWN);
+        assertEquals(8, car.getCoordinates()[0]);
+        assertEquals(33, car.getCoordinates()[1]);
 
     }
-
-    @Test
-    void numPlayers() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        int i=0;
-        i = fIleIOtrack.getPlayersNumber();
-     //   assertEquals(1, i);
-
-    }
-
-
-
 
 }

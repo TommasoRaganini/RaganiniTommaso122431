@@ -24,6 +24,10 @@
 
 package it.unicam.cs.formula1Classes;
 
+import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
+import it.unicam.cs.formula1Classes.Track.RaceTrack;
+import it.unicam.cs.formula1Classes.Player.Position;
+import it.unicam.cs.formula1Classes.Track.TrackGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,12 +50,29 @@ class RaceTrackTest {
 
     @Test
     void getTrack() {
+        TrackGenerator trackGenerator = new TrackGenerator();
         RaceTrack raceTrack = new RaceTrack();
-        String[][] track = FIleIOtrack.generateTrack();
+        String[][] track = trackGenerator.generateTrack();
         for(int i = 0; i < track.length; i++){
             for(int j = 0; j < track[i].length; j++){
                 assertEquals(track[i][j],raceTrack.getTrackPosition(i,j));
             }
         }
+        assertEquals(25,raceTrack.getRows());
+    }
+
+    @Test
+    void getStartAndFinishLine() {
+        RaceTrack raceTrack = new RaceTrack();
+        assertEquals(5,raceTrack.getStartAndFinishLine("S").size());
+        assertEquals(5,raceTrack.getStartAndFinishLine("F").size());
+        assertEquals(5,raceTrack.getStartLine().size());
+     for(Position p : raceTrack.getStartLine()){
+         System.out.println(p.toString());
+     }
+     for (Position p : raceTrack.getFinishLine()){
+         System.out.println(p.toString());
+     }
+
     }
 }

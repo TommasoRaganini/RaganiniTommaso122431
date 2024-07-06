@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.JavafxView;
 
-public interface Player {
+import it.unicam.cs.formula1Classes.Player.Controller;
 
-    public void move();
-
+public interface GameUIUpdater {
+    void updateTrackUI(String[][] trackMatrix, Controller[] controllers);
 }

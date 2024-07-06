@@ -4,4 +4,24 @@
 
 plugins {
     id("buildlogic.java-library-conventions")
+    id("org.openjfx.javafxplugin") version "0.0.13"
 }
+
+dependencies {
+    implementation("org.openjfx:javafx-controls:21.0.2")
+    implementation("org.openjfx:javafx-fxml:21.0.2")
+}
+
+repositories {
+    mavenCentral()
+    maven{
+        url = uri("https://jitpack.io")
+    }
+}
+
+javafx {
+    version = "21.0.2"
+    modules = listOf("javafx.controls", "javafx.fxml","javafx.media")
+}
+
+

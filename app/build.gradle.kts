@@ -4,14 +4,46 @@
 
 plugins {
     id("buildlogic.java-application-conventions")
+    application
+    id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 dependencies {
+
     implementation("org.apache.commons:commons-text")
     implementation(project(":api"))
+    implementation("org.openjfx:javafx-controls:21.0.2")
+    implementation("org.openjfx:javafx-fxml:21.0.2")
+}
+
+repositories {
+    mavenCentral()
+    maven{
+        url = uri("https://jitpack.io")
+    }
 }
 
 application {
     // Define the main class for the application.
-    mainClass = "it.unicam.cs.app.App"
+    mainClass.set("it.unicam.cs.app.App")
+    applicationDefaultJvmArgs = listOf("-Duser.dir=${projectDir}")
 }
+
+tasks.named<JavaExec>("run") {
+    standardInput = System.`in`
+}
+
+
+sourceSets {
+    getByName("main") {
+        resources {
+            srcDir("src/main/resources")
+        }
+    }
+}
+
+javafx {
+    version = "21.0.2"
+    modules = listOf("javafx.controls", "javafx.fxml","javafx.media")
+}
+

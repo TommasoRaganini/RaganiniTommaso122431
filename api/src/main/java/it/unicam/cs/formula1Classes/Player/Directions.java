@@ -22,48 +22,17 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.Player;
 
-public class RaceTrack {
-    private final String[][] track;
-    private final int rows;
-    private final int columns;
-
-    public RaceTrack() {
-        this.track = FIleIOtrack.generateTrack();
-        if (track.length == 0 || track[0].length == 0) {
-            throw new IllegalStateException("The track is empty or not properly initialized.");
-        }
-        this.rows = track.length;
-        this.columns = track[0].length;
-    }
-
-    public String[][] getTrack() {
-        return track;
-    }
-
-    public int getRows() {
-        return rows;
-    }
-
-    public int getColumns() {
-        return columns;
-    }
-
-    public String getTrackPosition(int row, int column) {
-        return track[row][column];
-    }
-
-    public void setTrackPosition(int row, int column, String value) {
-        track[row][column] = value;
-    }
-
-    public void printTrack() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
-                System.out.print(track[i][j] + " "+"\n");
-            }
-
-        }
-    }
+public enum Directions
+{
+    UP,
+    UP_RIGHT,
+    UP_LEFT,
+    DOWN,
+    DOWN_RIGHT,
+    DOWN_LEFT,
+    LEFT,
+    RIGHT,
+    CENTER
 }

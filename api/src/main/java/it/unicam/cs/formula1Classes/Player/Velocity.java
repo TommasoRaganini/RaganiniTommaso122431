@@ -22,43 +22,22 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.Player;
 
-import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
-
-import static org.junit.jupiter.api.Assertions.*;
-
-class FIleIOtrackTest {
-
-    @Test
-    void readFile() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        List<String> lines = fIleIOtrack.readFile("track.txt");
-        assertNotNull(lines);
-        // Verifica che il file non sia vuoto
-        assertFalse(lines.isEmpty(), "Il file non dovrebbe essere vuoto.");
-      //  lines.forEach(System.out::println);
-        assertTrue(lines.contains("*************************" +
-                "*******************************************************"));
-        assertTrue(lines.contains("******ppppppppppppppppppppppppppppppp" +
-                "FSppppppppppppppppppppppppppppppppppp******"));
-
+/**
+ * This class represents the Vector-Velocity of the car
+ * that extends the DirectionVector abstract class
+ */
+public class Velocity extends DirectionVector {
+    public Velocity() {
+        super();
     }
-
-    @Test
-    void numPlayers() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        int i=0;
-        i = fIleIOtrack.getPlayersNumber();
-     //   assertEquals(1, i);
-
+    /**
+     * This method calculates the velocity of the car using the Pythagorean theorem
+     * @return the velocity of the car
+     */
+    public double getVelocity() {
+        return Math.sqrt(Math.pow(getModule()[0], 2) + Math.pow(getModule()[1], 2));
     }
-
-
-
 
 }

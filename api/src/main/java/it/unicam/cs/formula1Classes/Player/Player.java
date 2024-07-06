@@ -22,7 +22,22 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.Player;
 
-public class Game {
+import java.util.List;
+
+/**
+ * This interface represents the player of the game
+ */
+public interface Player {
+
+    Car getCar();
+    /**
+     * This method moves the car of the player in a random direction
+     * @param moves the list of moves allowed for the car
+     */
+    void move(List<Directions> moves);
+
+    String toString();
+
 }

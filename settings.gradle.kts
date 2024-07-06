@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "it.unicam.cs.formula1"
-include("app", "api")
+include(":app", ":api")

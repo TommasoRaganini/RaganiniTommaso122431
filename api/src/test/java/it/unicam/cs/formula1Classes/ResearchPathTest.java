@@ -24,5 +24,27 @@
 
 package it.unicam.cs.formula1Classes;
 
-public class Controller {
+import it.unicam.cs.formula1Classes.Track.RaceTrack;
+import it.unicam.cs.formula1Classes.GameEngine.ResearchPath;
+import it.unicam.cs.formula1Classes.Player.Position;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ResearchPathTest {
+
+    @Test
+    void searchPath() {
+        RaceTrack track = new RaceTrack();
+        String[][] track1 = track.getTrack();
+        Position start = new Position(4, 35);
+        Position end = new Position(3, 36);
+        assertFalse(ResearchPath.searchPath(track1, start, end));
+        Position start1 = new Position(4, 35);
+        Position end1 = new Position(3, 37);
+        assertTrue(ResearchPath.searchPath(track1, start1, end1));
+
+
+
+    }
 }

@@ -24,41 +24,19 @@
 
 package it.unicam.cs.formula1Classes;
 
-import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FIleIOtrackTest {
+class GameSetupTest {
 
     @Test
-    void readFile() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        List<String> lines = fIleIOtrack.readFile("track.txt");
-        assertNotNull(lines);
-        // Verifica che il file non sia vuoto
-        assertFalse(lines.isEmpty(), "Il file non dovrebbe essere vuoto.");
-      //  lines.forEach(System.out::println);
-        assertTrue(lines.contains("*************************" +
-                "*******************************************************"));
-        assertTrue(lines.contains("******ppppppppppppppppppppppppppppppp" +
-                "FSppppppppppppppppppppppppppppppppppp******"));
-
+    void initGame() {
+//        GameSetup gameSetup = new GameSetup();
+//        OutputGame outputGame = new OutputGame();
+//        Controller[] controllers = gameSetup.initGame();
+//        assertEquals(2, controllers.length);
+//        assertNotNull(gameSetup);
+//        outputGame.printTrack(controllers[0].getRaceTrack(),controllers);
     }
-
-    @Test
-    void numPlayers() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        int i=0;
-        i = fIleIOtrack.getPlayersNumber();
-     //   assertEquals(1, i);
-
-    }
-
-
-
-
 }

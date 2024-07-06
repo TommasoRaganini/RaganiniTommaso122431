@@ -25,40 +25,44 @@
 package it.unicam.cs.formula1Classes;
 
 import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
+import it.unicam.cs.formula1Classes.Track.TrackGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class FIleIOtrackTest {
+class TrackGeneratorTest {
+        @Test
+    void generateTrack() {
+        FIleIOtrack fIleIOtrack = new FIleIOtrack();
+        TrackGenerator tr = new TrackGenerator();
+        String[][] track = tr.generateTrack();
+        assertTrue(track.length > 0, "The track should have at least one row.");
+        assertTrue(track[0].length > 0, "The first row of the track should have at least one column.");
+        assertTrue(track[0][0].contains("*"), "The first cell of the track should contain a '*'.");
+        assertTrue(track[2][7].contains("p"), "The first cell of the track should contain a 'p'.");
+        int count = 0;
+        int d = 0;
+        for(int i = 0; i < track.length; i++){
+            d++;
+            for(int j = 0; j < track[i].length; j++){
+                count++;
+            }
+        }
+        assertEquals(2000, count);
+        assertEquals(25, d);
+    }
 
     @Test
-    void readFile() throws Exception {
+    void countRowsAndColumns() throws Exception {
         FIleIOtrack fIleIOtrack = new FIleIOtrack();
+        TrackGenerator trackGenerator = new TrackGenerator();
         List<String> lines = fIleIOtrack.readFile("track.txt");
-        assertNotNull(lines);
-        // Verifica che il file non sia vuoto
-        assertFalse(lines.isEmpty(), "Il file non dovrebbe essere vuoto.");
-      //  lines.forEach(System.out::println);
-        assertTrue(lines.contains("*************************" +
-                "*******************************************************"));
-        assertTrue(lines.contains("******ppppppppppppppppppppppppppppppp" +
-                "FSppppppppppppppppppppppppppppppppppp******"));
-
+        int[] rowsAndColumns = trackGenerator.countRowsAndColumns(lines);
+        assertEquals(25, rowsAndColumns[0]);
+        assertEquals(80, rowsAndColumns[1]);
     }
-
-    @Test
-    void numPlayers() throws Exception {
-        FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        int i=0;
-        i = fIleIOtrack.getPlayersNumber();
-     //   assertEquals(1, i);
-
-    }
-
-
 
 
 }

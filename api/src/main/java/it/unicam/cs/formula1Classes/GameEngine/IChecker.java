@@ -22,38 +22,31 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.GameEngine;
 
-public class Position {
-    int x;
-    int y;
+import it.unicam.cs.formula1Classes.Player.Controller;
+import it.unicam.cs.formula1Classes.Player.Directions;
 
-    public Position(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+import java.util.List;
+/**
+ * This interface is used to effettuate all the checks of the game
+ */
+public interface IChecker {
     /**
-     * @return the x
+     * This method checks if the game is over
+     *
+     * @param c the controller that is being checked
+     * @return true if the game is over, false otherwise
      */
-    public int getX() {
-        return x;
-    }
+    boolean checkWin(Controller c);
     /**
-     * @param x the x to set
+     * This method returns a list of valid moves for the car
+     *
+     * @param c the controller of the game
+     * @return a list of valid moves for the car
      */
-    public void setX(int x) {
-        this.x = x;
-    }
-    /**
-     * @return the y
-     */
-    public int getY() {
-        return y;
-    }
-    /**
-     * @param y the y to set
-     */
-    public void setY(int y) {
-        this.y = y;
-    }
+    List<Directions> getValidMoves(Controller c);
+
+
+
 }

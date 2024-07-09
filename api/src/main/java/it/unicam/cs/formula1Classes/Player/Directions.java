@@ -23,7 +23,10 @@
  */
 
 package it.unicam.cs.formula1Classes.Player;
-
+/**
+ * Enum representing the possible directions a player can move in the Formula 1 game.
+ * This includes not only the cardinal directions but also intermediate ones and a stationary position.
+ */
 public enum Directions
 {
     UP,

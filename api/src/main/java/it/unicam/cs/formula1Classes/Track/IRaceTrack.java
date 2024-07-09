@@ -28,10 +28,26 @@ import it.unicam.cs.formula1Classes.Player.Position;
 
 import java.util.List;
 
+/**
+ * Interface representing the racetrack in the Formula 1 game.
+ * Provides methods to access the track layout, start and finish lines, and dimensions.
+ */
 public interface IRaceTrack {
     String[][] getTrack();
     int getRows();
     int getColumns();
+    /**
+     * Retrieves the positions of the start line on the racetrack.
+     * This method is crucial for setting up the initial positions of the cars at the beginning of the race.
+     *
+     * @return A list of {@link Position} objects representing the start line positions. Each position indicates a specific grid coordinate on the track where a car can be placed at the start of the race.
+     */
     List<Position> getStartLine();
+    /**
+     * Retrieves the positions of the finish line on the racetrack.
+     * This method is crucial for determining when a car has completed a lap and crossed the finish line.
+     *
+     * @return A list of {@link Position} objects representing the finish line positions. Each position indicates a specific grid coordinate on the track where a car can be placed at the end
+     */
     List<Position> getFinishLine();
 }

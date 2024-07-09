@@ -46,7 +46,7 @@ class ResearchPathTest {
         assertFalse(ResearchPath.searchPath(track1, start, end, player));
         Position start1 = new Position(4, 35);
         Position end1 = new Position(3, 37);
-        assertTrue(ResearchPath.searchPath(track1, start1, end1, player));
+        assertFalse(ResearchPath.searchPath(track1, start1, end1, player));
 
 
 

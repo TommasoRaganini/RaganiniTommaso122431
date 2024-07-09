@@ -26,11 +26,22 @@ package it.unicam.cs.formula1Classes.JavafxView;
 
 import it.unicam.cs.formula1Classes.Player.Directions;
 
-
+/**
+ * Controller for handling move selection in the Formula 1 game.
+ * This class listens for move selections and notifies other components when a move has been selected.
+ * It implements the {@link MoveListener} interface to receive move selection events.
+ */
 public class MoveViewController implements MoveListener{
     private Directions direction;
     private volatile boolean isMoveSelected = false;
 
+    /**
+     * Handles the event when a move is selected.
+     * Sets the selected direction and updates the move selection flag.
+     * Notifies all waiting threads that a move has been selected.
+     *
+     * @param direction The direction of the selected move.
+     */
     @Override
     public void onMoveSelected(Directions direction) {
         this.direction = direction;
@@ -39,12 +50,21 @@ public class MoveViewController implements MoveListener{
             this.notifyAll();
         }
     }
+
+    /**
+     * Waits for a move to be selected.
+     * This method blocks until {@code isMoveSelected} becomes true, indicating that a move has been selected.
+     * Once a move is selected, it resets the move selection flag for future moves.
+     *
+     * @throws InterruptedException if any thread interrupted the current thread before or while the current thread was waiting for a move selection.
+     */
     public synchronized void waitForMoveSelection() throws InterruptedException {
         while (!isMoveSelected) {
             this.wait();
         }
         isMoveSelected = false; // Reset per la prossima mossa
     }
+
     public Directions getDirection(){
         return direction;
     }

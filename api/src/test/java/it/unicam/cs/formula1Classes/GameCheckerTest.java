@@ -38,20 +38,28 @@ class GameCheckerTest {
 
     @Test
     void checkWin() {
-        Player c = new Bot(new Car(5,30));
+        Player c = new Bot(new Car(9,5));
         GameChecker g = new GameChecker(new Player[]{c});
         RaceTrack track= new RaceTrack();
-        c.getCar().move(Directions.RIGHT);
-        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
-        c.getCar().move(Directions.RIGHT);
-        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
-        c.getCar().move(Directions.RIGHT);
-        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
-        assertFalse(g.checkWin(c,track,15));
         c.getCar().move(Directions.UP_RIGHT);
         System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
-        assertTrue(g.checkWin(c,track,15));
-
+        g.checkWin(c,track,2);
+        c.getCar().move(Directions.UP_RIGHT);
+        g.checkWin(c,track,3);
+        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
+        c.getCar().move(Directions.DOWN_RIGHT);
+        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
+        assertFalse(g.checkWin(c,track,15));
+        c.getCar().move(Directions.DOWN_RIGHT);
+        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
+        c.getCar().move(Directions.RIGHT);
+        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
+        c.getCar().move(Directions.RIGHT);
+        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
+        c.getCar().move(Directions.RIGHT);
+        System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
+        c.getCar().move(Directions.RIGHT);
+        assertTrue(g.checkWin(c,track,20));
     }
 
     @Test

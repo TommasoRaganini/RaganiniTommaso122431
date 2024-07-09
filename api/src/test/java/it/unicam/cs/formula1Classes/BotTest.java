@@ -48,6 +48,7 @@ class BotTest {
         for(Directions d : moves){
             System.out.println(d);
         }
+        System.out.println(" ");
         bot.move(moves);
         Bot bot2 = new Bot(new Car(2, 44));
         Player[] players2 = new Player[]{bot2};

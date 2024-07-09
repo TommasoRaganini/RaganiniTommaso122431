@@ -71,6 +71,10 @@ public class GraphicController implements GameUIUpdater,Initializable {
         this.moveListener = new MoveViewController();
     }
 
+    /**
+     * Handles the action of starting the game.
+     * It retrieves the selected number of players, validates it, and then initializes the game components.
+     */
     @FXML
     void onButtonStartGame() {
         new Thread(() -> {
@@ -84,7 +88,9 @@ public class GraphicController implements GameUIUpdater,Initializable {
             gameEngine.launchGame();
         }).start();
     }
-
+    /**
+     * Sets the visibility and availability of UI components for the game setup.
+     */
     private void setComponents() {
         setInsertLabel("");
         NoteLabel.setVisible(true);
@@ -95,44 +101,68 @@ public class GraphicController implements GameUIUpdater,Initializable {
         startButton.setVisible(false);
         RulesLabel.setVisible(false);
     }
-
+    /**
+     * Initializes the controller class.
+     * Generates and displays the track on the UI.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] trackMatrix =TrackGenerator.generateTrack();
         Util.drawTrack(trackMatrix, PaneTrack);
         Platform.runLater(this::setNumPlayers);
     }
-
+    /**
+     * Updates the track UI with the current positions of the players.
+     * @param trackMatrix The matrix representing the track layout.
+     * @param players The array of players to be displayed on the track.
+     */
     public void updateTrackUI(String[][] trackMatrix, Player[] players) {
         Platform.runLater(() -> Util.updateTrack(players, trackMatrix, PaneTrack));
     }
-
+    /**
+     * Updates the UI to display the winner of the game.
+     * @param player The player who won the game.
+     */
     public void updateWinnerUI(Player player){
         Platform.runLater(() -> WinnerText.setText("The winner is: " + player.toString()));
     }
-
+    /**
+     * Updates the UI to display the valid moves for the current player.
+     * @param validMoves The list of valid moves for the current player.
+     */
     public void updateMovesChoiceBox(List<Directions> validMoves) {
         Platform.runLater(() -> {
             moves.getItems().clear();
             moves.getItems().addAll(validMoves);
         });
     }
-
+    /**
+     * Handles the action of moving the player.
+     * Retrieves the selected move from the UI and notifies the move listener.
+     */
     @FXML
     void onButtonMove() {
         Directions selectedMove = moves.getSelectionModel().getSelectedItem();
         moveListener.onMoveSelected(selectedMove);
     }
-
+    /**
+     * Updates the UI to display a message to the user.
+     * @param message The message to be displayed.
+     */
     public void setInsertLabel(String message){
         Platform.runLater(() -> InsertLabel.setText(message));
     }
-
+    /**
+     * Sets the number of players in the choice box for the user to select.
+     */
     public void setNumPlayers(){
         numPLayers.getItems().clear();
         numPLayers.getItems().addAll(1,2,3,4,5);
     }
-
+    /**
+     * Retrieves the number of players selected by the user.
+     * @return The number of players selected by the user.
+     */
     public Integer getNumPlayers(){
         return numPLayers.getSelectionModel().getSelectedItem();
     }

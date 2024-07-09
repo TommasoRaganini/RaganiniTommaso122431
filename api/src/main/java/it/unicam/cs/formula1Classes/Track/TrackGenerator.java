@@ -26,14 +26,21 @@ package it.unicam.cs.formula1Classes.Track;
 
 import java.util.List;
 
+/**
+ * Utility class for generating a racetrack for the Formula 1 game from a file.
+ * This class provides methods to generate a track layout from a specified file and to calculate the dimensions of the track.
+ */
 public class TrackGenerator {
 
     private static final FIleIOtrack f= new FIleIOtrack();
 
     /**
-     * This method generates the track from the file read by the method readFile
+     * Generates the racetrack layout from a file.
+     * Reads the track configuration from "track.txt" and converts it into a 2D array representing the track layout.
+     * Each cell of the array contains a String representing a part of the track (e.g., road, start line, finish line).
      *
-     * @return String[][]
+     * @return A 2D String array representing the generated track layout.
+     * @throws RuntimeException if there is an error reading the file.
      */
     public static String[][] generateTrack() {
         List<String> lines;
@@ -53,10 +60,11 @@ public class TrackGenerator {
         return track;
     }
     /**
-     * This method counts the number of rows and columns of the track
+     * Counts the number of rows and columns in the track layout.
+     * This method is used to determine the dimensions of the track based on the content of the file.
      *
-     * @param lines List<String>
-     * @return int[]
+     * @param lines A List of Strings, each representing a line in the track configuration file.
+     * @return An array of two integers, where the first element is the number of rows and the second is the number of columns.
      */
     public static int[] countRowsAndColumns(List<String> lines) {
         int rows = lines.size();

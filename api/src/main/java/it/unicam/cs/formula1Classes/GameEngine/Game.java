@@ -29,7 +29,8 @@ import it.unicam.cs.formula1Classes.Player.Player;
 import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 
 /**
- * This class parse the interaction between the gamelogic and the UI
+ * Represents the core game engine that manages the gameplay logic, including player movements,
+ * track updates, and determining the game outcome.
  */
 public class Game {
     private final Player[] players;
@@ -41,6 +42,14 @@ public class Game {
     private final static int FIRST_ROUND_CONTROL = 2;
     private GameStrategy currentStrategy;
 
+    /**
+     * Constructs a new Game instance with specified UI updater, track, checker, and players.
+     *
+     * @param updater The interface for updating the game UI.
+     * @param track The racetrack where the game takes place.
+     * @param checker The checker used to determine game outcomes.
+     * @param players The array of players participating in the game.
+     */
     public Game(GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
         this.track= track;
         this.players = players;
@@ -49,12 +58,13 @@ public class Game {
     }
 
     /**
-     * This method starts the game
+     * Starts the game and manages the game loop until the game ends.
+     * It updates the UI with the initial state, decides the game strategy based on the round,
+     * and plays rounds until a win condition is met.
      */
     public void startGame() {
         updater.updateTrackUI(track.getTrack(), players);
         while (!endGame) {
-            // Decide la strategia in base al round o ad altre condizioni
             if (round < FIRST_ROUND_CONTROL) {
                 currentStrategy = new FirstRoundStrategy();
             } else {
@@ -63,7 +73,11 @@ public class Game {
             playRound();
         }
     }
-
+    /**
+     * Plays a single round of the game.
+     * It iterates through each player, allowing them to take their turn based on the current strategy.
+     * Checks for a win condition after each player's turn and updates the UI if a winner is found.
+     */
     private void playRound() {
         for (Player player : players) {
             currentStrategy.playRound(player, updater, track, checker, players);
@@ -74,7 +88,6 @@ public class Game {
             }
         }
         round++;
-        // Potresti voler controllare la condizione di fine gioco qui, in base alla logica specifica
     }
 
 }

@@ -28,7 +28,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 /**
- * This class represents the direction vector of the car
+ * Represents the direction vector of a car in a 2D space.
+ * This abstract class provides the basic functionality to manage the direction and movement
+ * of a car by using a module vector that indicates the direction and magnitude of the movement.
  */
 public abstract class DirectionVector {
     private final int[] module;
@@ -44,7 +46,9 @@ public abstract class DirectionVector {
         directionMap.put(Directions.RIGHT, new int[]{0, 1});
         directionMap.put(Directions.CENTER, new int[]{0, 0});
     }
-
+    /**
+     * Constructs a new DirectionVector with an initial module vector pointing to the center (0,0).
+     */
     public DirectionVector() {
         this.module = new int[]{0, 0};
     }
@@ -59,7 +63,7 @@ public abstract class DirectionVector {
         this.module[1] = x;
     }
 
-    /**
+    /**Updates the module vector of the car by moving it in the specified direction.
      * @param direction the direction of the movement
      * @return the new module of the vector
      */

@@ -28,7 +28,9 @@ package it.unicam.cs.formula1Classes.Player;
 import java.util.ArrayList;
 
 /**
- * This class represents the Car of the game
+ * Represents a car in the Formula 1 game simulation.
+ * A car has a path it follows on the track, represented by a series of positions,
+ * and a velocity vector that determines its movement direction and speed.
  */
 public class Car {
     private final ArrayList<Position> path;

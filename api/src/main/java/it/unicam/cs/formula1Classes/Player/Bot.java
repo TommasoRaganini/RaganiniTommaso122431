@@ -30,7 +30,8 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * This class represents the bot player
+ * Represents a bot player in the Formula 1 game simulation.
+ * The bot player makes moves based on a random selection from the available moves.
  */
 public class Bot extends Player {
     private final Random random;
@@ -44,7 +45,13 @@ public class Bot extends Player {
     public Car getCar() {
         return super.getCar();
     }
-
+    /**
+     * Performs a move for the bot based on a random selection from the available moves.
+     * The move is executed by updating the bot's car position.
+     *
+     * @param moves   A list of possible directions the bot can move.
+     * @param updater An instance of {@link GameUIUpdater} used for updating the game UI.
+     */
     @Override
     public void move(List<Directions> moves, GameUIUpdater updater) {
         if(checkAllowedMoves(moves))
@@ -53,6 +60,12 @@ public class Bot extends Player {
         Directions randomDirection = directions[random.nextInt(directions.length)];
         super.getCar().move(randomDirection);
     }
+    /**
+     * Overloaded move method for testing purposes.
+     * Performs a move based on a random selection from the available moves without updating the game UI.
+     *
+     * @param moves A list of possible directions the bot can move.
+     */
     public void move(List<Directions> moves){
         if(moves.isEmpty()) {
             super.getCar().getVector().setModule(0, 0);

@@ -50,12 +50,10 @@ class FIleIOtrackTest {
     }
 
     @Test
-    void numPlayers() throws Exception {
+    void numPlayers() {
         FIleIOtrack fIleIOtrack = new FIleIOtrack();
-        int i=0;
-        i = fIleIOtrack.getPlayersNumber();
-     //   assertEquals(1, i);
-
+        int i = fIleIOtrack.getPlayersNumber();
+        assertEquals(2, i);
     }
 
 

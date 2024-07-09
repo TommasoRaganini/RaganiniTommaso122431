@@ -36,9 +36,16 @@ import it.unicam.cs.formula1Classes.Track.RaceTrack;
 public class GameLauncher {
     private final Game game;
 
+    /**
+     * Constructs a GameLauncher with a specified UI updater and move listener.
+     * Initializes the game environment including the track, players, and game checker.
+     *
+     * @param updater The interface for updating the game UI.
+     * @param moveListener The listener for player moves.
+     */
     public GameLauncher(GameUIUpdater updater, MoveListener moveListener) {
         IRaceTrack track = new RaceTrack();
-        Player[] players = setupPlayers(moveListener,updater);
+        Player[] players = new GameSetup(updater).initGame(moveListener);
         IChecker checker = new GameChecker(players);
         this.game = new Game(updater, track, checker, players);
     }
@@ -47,17 +54,6 @@ public class GameLauncher {
      */
     public void launchGame() {
         game.startGame();
-    }
-
-    /**
-     * This method initializes the players
-     *
-     * @param moveListener the move listener
-     * @return the players
-     */
-    private Player[] setupPlayers(MoveListener moveListener, GameUIUpdater updater) {
-        GameSetup setup = new GameSetup(updater);
-        return setup.initGame(moveListener);
     }
 
 }

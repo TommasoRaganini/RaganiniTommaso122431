@@ -29,13 +29,19 @@ import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
 import java.util.List;
 
 /**
- * This interface represents the player of the game
+ * Abstract class representing a player in the Formula 1 game.
+ * This class provides the basic structure and functionalities that all types of players (human, AI, etc.) should have.
  */
 public abstract class Player {
     private final Car car;
     private final int playerId;
 
-
+    /**
+     * Constructs a Player with a specified car and player ID.
+     *
+     * @param car The car assigned to the player.
+     * @param playerId The unique identifier for the player.
+     */
     public Player(Car car, int playerId) {
         this.car = car;
         this.playerId = playerId;

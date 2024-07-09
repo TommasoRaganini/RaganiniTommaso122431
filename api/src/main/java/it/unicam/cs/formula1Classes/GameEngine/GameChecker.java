@@ -24,11 +24,8 @@
 
 package it.unicam.cs.formula1Classes.GameEngine;
 
-import it.unicam.cs.formula1Classes.Player.Controller;
-import it.unicam.cs.formula1Classes.Player.DirectionVector;
-import it.unicam.cs.formula1Classes.Player.Directions;
-import it.unicam.cs.formula1Classes.Player.Position;
-
+import it.unicam.cs.formula1Classes.Player.*;
+import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,20 +34,35 @@ import java.util.Map;
  * for checking the  status of the game
  */
 public class GameChecker implements IChecker {
-    private final Controller[] controllers;
+    private final Player[] players;
 
-    public GameChecker(Controller[] controllers) {
-        this.controllers = controllers;
+    public GameChecker(Player[] players) {
+        this.players = players;
     }
 
-    public boolean checkWin(Controller c) {
-        Position p1 = c.getCar().getPosition();
-        Position p2 = c.getCar().getPath().get(c.getCar().getPath().size() - 2);
+    /**
+     * This method checks if the game is over
+     *
+     * @param p the player that is being checked
+     * @return true if the game is over, false otherwise
+     */
+    public boolean checkWin(Player p, IRaceTrack track,int round) {
+        if(round > 1){
+            Position p1 = p.getCar().getPosition();
+            Position p2 = p.getCar().getPath().get(p.getCar().getPath().size() - 2);
 
-        return ResearchPath.searchPath(c.getRaceTrack().getTrack(), p1, p2);
+            return ResearchPath.searchPath(track.getTrack(), p1, p2, p);
+        }
+        return false;
     }
 
-    public List<Directions> getValidMoves(Controller c) {
+    /**
+     * This method returns a list of valid moves for the car
+     *
+     * @param c one of the player playing the game
+     * @return a list of valid moves for the car
+     */
+    public List<Directions> getValidMoves(Player c, IRaceTrack track) {
         List<Directions> validMoves = new ArrayList<>();
         int[] module = c.getCar().getVector().getModule();
         int y = c.getCarCoordinates()[0];
@@ -59,7 +71,7 @@ public class GameChecker implements IChecker {
             int[] direction = entry.getValue();
             int newY = y + direction[0] + module[0];
             int newX = x + direction[1] + module[1];
-            if (isValidMove(c, newY, newX)) {
+            if (isValidMove(c,track, newY, newX)) {
                 validMoves.add(entry.getKey());
             }
         }
@@ -69,19 +81,19 @@ public class GameChecker implements IChecker {
     /**
      * This method checks if the move is valid
      *
-     * @param c    the controller of the game
+     * @param p    the player that is being checked
      * @param newY the y coordinate of the car
      * @param newX the x coordinate of the car
      * @return true if the move is valid, false otherwise
      */
-    private boolean isValidMove(Controller c, int newY, int newX) {
-        for (Controller controller : controllers) {
-            if (!(controller.equals(c)) && controller.getCarCoordinates()[0] == newY && controller.getCarCoordinates()[1] == newX) {
+    private boolean isValidMove(Player p,IRaceTrack track, int newY, int newX) {
+        for (Player player : players) {
+            if (!(player.equals(p)) && player.getCarCoordinates()[0] == newY && player.getCarCoordinates()[1] == newX) {
                 return false;
             }
         }
-        return newY >= 0 && newY < c.getRaceTrack().getRows() && newX >= 0
-                && newX < c.getRaceTrack().getColumns() && !(c.getRaceTrack().getTrack()[newY][newX].equals("*"));
+        return newY >= 0 && newY < track.getRows() && newX >= 0
+                && newX < track.getColumns() && !(track.getTrack()[newY][newX].equals("*"));
     }
 
 }

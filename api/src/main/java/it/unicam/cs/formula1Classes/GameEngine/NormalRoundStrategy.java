@@ -22,39 +22,25 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes;
+package it.unicam.cs.formula1Classes.GameEngine;
 
-import it.unicam.cs.formula1Classes.GameEngine.GameChecker;
-import it.unicam.cs.formula1Classes.InputOutput.InputPlayer;
-import it.unicam.cs.formula1Classes.Player.Car;
-import it.unicam.cs.formula1Classes.Player.Controller;
+import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
 import it.unicam.cs.formula1Classes.Player.Directions;
 import it.unicam.cs.formula1Classes.Player.HumanPlayer;
-import org.junit.jupiter.api.Test;
+import it.unicam.cs.formula1Classes.Player.Player;
+import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class InputPlayerTest {
-
-    @Test
-    void getDirection() {
-        String input = "UP_RIGHT\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        InputPlayer inputPlayer = new InputPlayer(in);
-        Controller[] controllers = new Controller[]{new Controller(new HumanPlayer(new Car(2,44))),
-                new Controller(new HumanPlayer(new Car(3,44)))};
-        GameChecker gameChecker = new GameChecker(controllers);
-        assertEquals(Directions.UP_RIGHT, inputPlayer.getDirection(gameChecker.getValidMoves(controllers[0])));
-    }
-
-    @Test
-    void getNumberOfPlayers() {
-        String input = "2\n";
-        InputStream in = new ByteArrayInputStream(input.getBytes());
-        InputPlayer inputPlayer = new InputPlayer(in);
-        assertEquals(2, inputPlayer.getNumberOfPlayers());
+public class NormalRoundStrategy implements GameStrategy {
+    @Override
+    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
+        // Logica per i round successivi al primo
+        List<Directions> moves = checker.getValidMoves(player, track);
+        if(player instanceof HumanPlayer){
+            updater.updateMovesChoiceBox(moves);
+        }
+        player.move(moves, updater);
+        updater.updateTrackUI(track.getTrack(), players);
     }
 }

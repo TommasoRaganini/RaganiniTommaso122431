@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes.InputOutput;
+package InputOutput;
 
 import it.unicam.cs.formula1Classes.Track.RaceTrack;
-import it.unicam.cs.formula1Classes.Player.Controller;
 import it.unicam.cs.formula1Classes.Player.Player;
 
 /**
@@ -36,12 +35,12 @@ public class OutputGame {
      * This method prints the track of the game
      *
      * @param raceTrack the track of the game
-     * @param controllers the controllers of the game
+     * @param players the players of the game
      */
-    public static void printTrack(RaceTrack raceTrack, Controller[] controllers, int round) {
+    public static void printTrack(RaceTrack raceTrack, Player[] players, int round) {
         for (int i = 0; i < raceTrack.getRows(); i++) {
             for (int j = 0; j < raceTrack.getColumns(); j++) {
-                if (CarPos(controllers, i, j)) {
+                if (CarPos(players, i, j)) {
                     System.out.print("C");
                 } else {
                     System.out.print(raceTrack.getTrack()[i][j]);
@@ -54,14 +53,14 @@ public class OutputGame {
     /**
      * This method checks if a car is in a certain position
      *
-     * @param controllers the controllers of the game
+     * @param players the players of the game
      * @param i the row of the position
      * @param j the column of the position
      * @return true if a car is in the position, false otherwise
      */
-    private static boolean CarPos(Controller[] controllers, int i, int j) {
-        for (Controller c : controllers) {
-            if (c.getCarCoordinates()[0] == i && c.getCarCoordinates()[1] == j) {
+    private static boolean CarPos(Player[] players, int i, int j) {
+        for (Player p : players) {
+            if (p.getCarCoordinates()[0] == i && p.getCarCoordinates()[1] == j) {
                 return true;
             }
         }

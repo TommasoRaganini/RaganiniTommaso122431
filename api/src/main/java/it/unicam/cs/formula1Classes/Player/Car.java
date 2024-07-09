@@ -33,6 +33,7 @@ import java.util.ArrayList;
 public class Car {
     private final ArrayList<Position> path;
     private final Velocity vector;
+    private boolean checkPoint = false;
 
     /**
      * @param y the y coordinate of the car
@@ -55,6 +56,13 @@ public class Car {
     }
 
 
+    public void setCheckPoint(boolean checkPoint) {
+        this.checkPoint = checkPoint;
+    }
+
+    public boolean getCheckPoint() {
+        return this.checkPoint;
+    }
 
     /**
      * @param direction modifies the position of the car according to the direction vector
@@ -86,8 +94,11 @@ public class Car {
 
     public int[] getPreviousCoordinates() {
         if (this.path.size() < 2) {
-            return new int[]{this.path.get(0).getY(), this.path.get(0).getX()};
+            return new int[]{this.path.getFirst().getY(), this.path.getFirst().getX()};
         }
         return new int[]{this.path.get(this.path.size() - 2).getY(), this.path.get(this.path.size() - 2).getX()};
+    }
+    public void removeLastPosition(){
+        this.path.remove(this.path.getLast());
     }
 }

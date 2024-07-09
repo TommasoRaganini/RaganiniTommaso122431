@@ -22,32 +22,40 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes.GameEngine;
+package it.unicam.cs.formula1Classes.JavafxView;
 
 import it.unicam.cs.formula1Classes.Player.Directions;
-import it.unicam.cs.formula1Classes.Player.Player;
-import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 
-import java.util.List;
+
 /**
- * This interface is used to effettuate all the checks of the game
+ * Interface defining the contract for listening to move selections in a Formula 1 game.
+ * Implementations of this interface are responsible for handling user input regarding
+ * the direction of a player's move in the game.
  */
-public interface IChecker {
-    /**
-     * This method checks if the game is over
-     *
-     * @param p the controller that is being checked
-     * @return true if the game is over, false otherwise
-     */
-    boolean checkWin(Player p, IRaceTrack t, int round);
-    /**
-     * This method returns a list of valid moves for the car
-     *
-     * @param p the controller of the game
-     * @return a list of valid moves for the car
-     */
-    List<Directions> getValidMoves(Player p, IRaceTrack t);
+public interface MoveListener {
 
+    /**
+     * Invoked when a move is selected by the player.
+     * Implementations should define how the game handles the selected direction.
+     *
+     * @param direction The direction of the move selected by the player.
+     */
+    void onMoveSelected(Directions direction);
 
+    /**
+     * Retrieves the current direction selected by the player.
+     * This method allows querying the last known direction that was selected.
+     *
+     * @return The current direction selected by the player.
+     */
+    Directions getDirection();
+
+    /**
+     * Waits for the player to make a move selection.
+     * This method may block until a move is selected, depending on the implementation.
+     *
+     * @throws InterruptedException if the thread waiting for the move selection is interrupted.
+     */
+    void waitForMoveSelection() throws InterruptedException;
 
 }

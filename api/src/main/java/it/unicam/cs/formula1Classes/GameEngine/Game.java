@@ -25,27 +25,26 @@
 package it.unicam.cs.formula1Classes.GameEngine;
 
 import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
-import it.unicam.cs.formula1Classes.JavafxView.Util;
-import it.unicam.cs.formula1Classes.Player.Controller;
-import it.unicam.cs.formula1Classes.Player.Directions;
-
-import java.util.List;
+import it.unicam.cs.formula1Classes.Player.Player;
+import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 
 /**
- * This class represents the motor of the game
-
+ * This class parse the interaction between the gamelogic and the UI
  */
 public class Game {
-    private final Controller[] controllers;
+    private final Player[] players;
+    private final IRaceTrack track;
     private final IChecker checker;
     private final GameUIUpdater updater;
     private int round = 1;
     private boolean endGame = false;
+    private final static int FIRST_ROUND_CONTROL = 2;
+    private GameStrategy currentStrategy;
 
-    public Game(GameUIUpdater updater) {
-        GameSetup setup = new GameSetup();
-        this.controllers = setup.initGame();
-        this.checker = new GameChecker(controllers);
+    public Game(GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
+        this.track= track;
+        this.players = players;
+        this.checker = checker;
         this.updater = updater;
     }
 
@@ -53,24 +52,33 @@ public class Game {
      * This method starts the game
      */
     public void startGame() {
+        updater.updateTrackUI(track.getTrack(), players);
         while (!endGame) {
-            for (Controller c : controllers) {
-                if (round < 5) {
-                    c.moveCar(List.of(Directions.RIGHT));
-                } else {
-                    c.moveCar(this.checker.getValidMoves(c));
-                    if (checker.checkWin(c)) {
-                        endGame = true;
-                        //OutputGame.printWinner(c.getPlayer());
-                        break;
-                    }
-                }
+            // Decide la strategia in base al round o ad altre condizioni
+            if (round < FIRST_ROUND_CONTROL) {
+                currentStrategy = new FirstRoundStrategy();
+            } else {
+                currentStrategy = new NormalRoundStrategy();
             }
-            updater.updateTrackUI(controllers[0].getRaceTrack().getTrack(), controllers);
-           // OutputGame.printTrack(controllers[0].getRaceTrack(), controllers, round);
-            round++;
+            playRound();
         }
     }
 
+    private void playRound() {
+        for (Player player : players) {
+            currentStrategy.playRound(player, updater, track, checker, players);
+            endGame = checker.checkWin(player, track, round);
+            if (endGame) {
+                updater.updateWinnerUI(player);
+                break;
+            }
+        }
+        round++;
+        // Potresti voler controllare la condizione di fine gioco qui, in base alla logica specifica
+    }
 
 }
+
+
+
+

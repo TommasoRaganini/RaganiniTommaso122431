@@ -24,9 +24,11 @@
 
 package it.unicam.cs.formula1Classes.GameEngine;
 
+import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
+import it.unicam.cs.formula1Classes.JavafxView.MoveListener;
 import it.unicam.cs.formula1Classes.Track.FIleIOtrack;
+import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 import it.unicam.cs.formula1Classes.Track.RaceTrack;
-import it.unicam.cs.formula1Classes.InputOutput.InputPlayer;
 import it.unicam.cs.formula1Classes.Player.*;
 
 import java.util.List;
@@ -34,34 +36,32 @@ import java.util.List;
  * This class represents the setup initialization of the game
  */
 public class GameSetup {
-    private final Controller[] controllers;
+    private final Player[] players;
     private final FIleIOtrack fIleIOtrack = new FIleIOtrack();
-    private final InputPlayer inputPlayer = new InputPlayer();
     private final int numPlayers = fIleIOtrack.getPlayersNumber();
-    private final int numHumPl = inputPlayer.getNumberOfPlayers();
-    public GameSetup() {
-        this.controllers = new Controller[numPlayers+numHumPl];
+    private final int numHumPl;
+    public GameSetup(GameUIUpdater updater) {
+        this.numHumPl = updater.getNumPlayers();
+        this.players = new Player[numPlayers+numHumPl];
     }
     /**
      * This method initializes the game
      * @return the controllers of the game
      */
-    public Controller[] initGame() {
-        RaceTrack raceTrack = new RaceTrack();
+    public Player[] initGame(MoveListener moveListener) {
+        IRaceTrack raceTrack = new RaceTrack();
         List<Position> positions = raceTrack.getStartLine();
             if (this.numHumPl + this.numPlayers > 5) {
                 System.out.println("The number of players is too high");
                 System.exit(0);
             }
             for (int n = 0; n < this.numHumPl; n++) {
-                controllers[n] = new Controller(new HumanPlayer(
-                        new Car(positions.get(n))));
+                players[n] =new HumanPlayer(new Car(positions.get(n)), moveListener);
             }
             for (int i = this.numHumPl; i < this.numPlayers+this.numHumPl; i++) {
-            controllers[i] = new Controller(new Bot(
-                    new Car(positions.get(i))));
+            players[i] =new Bot(new Car(positions.get(i)));
              }
-        return controllers;
+        return players;
     }
 
 }

@@ -27,8 +27,9 @@ package it.unicam.cs.formula1Classes;
 import it.unicam.cs.formula1Classes.GameEngine.GameChecker;
 import it.unicam.cs.formula1Classes.Player.Bot;
 import it.unicam.cs.formula1Classes.Player.Car;
-import it.unicam.cs.formula1Classes.Player.Controller;
 import it.unicam.cs.formula1Classes.Player.Directions;
+import it.unicam.cs.formula1Classes.Player.Player;
+import it.unicam.cs.formula1Classes.Track.RaceTrack;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -40,17 +41,19 @@ class BotTest {
     @Test
     void move() {
         Bot bot = new Bot(new Car(4, 44));
-        Controller controller = new Controller(bot);
-        GameChecker gameChecker = new GameChecker(new Controller[]{controller});
-        List<Directions> moves = gameChecker.getValidMoves(controller);
+        Player[] players = new Player[]{bot};
+        GameChecker gameChecker = new GameChecker(players);
+        RaceTrack track = new RaceTrack();
+        List<Directions> moves = gameChecker.getValidMoves(players[0],track);
         for(Directions d : moves){
             System.out.println(d);
         }
         bot.move(moves);
         Bot bot2 = new Bot(new Car(2, 44));
-        Controller controller2 = new Controller(bot2);
-        GameChecker gameChecker2 = new GameChecker(new Controller[]{controller2});
-        List<Directions> moves2 = gameChecker2.getValidMoves(controller2);
+        Player[] players2 = new Player[]{bot2};
+        RaceTrack track2 = new RaceTrack();
+        GameChecker gameChecker2 = new GameChecker(players2);
+        List<Directions> moves2 = gameChecker2.getValidMoves(players2[0],track2);
         for(Directions d : moves2){
             System.out.println(d);
         }

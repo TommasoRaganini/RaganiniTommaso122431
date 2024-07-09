@@ -27,8 +27,9 @@ package it.unicam.cs.formula1Classes;
 import it.unicam.cs.formula1Classes.GameEngine.GameChecker;
 import it.unicam.cs.formula1Classes.Player.Bot;
 import it.unicam.cs.formula1Classes.Player.Car;
-import it.unicam.cs.formula1Classes.Player.Controller;
 import it.unicam.cs.formula1Classes.Player.Directions;
+import it.unicam.cs.formula1Classes.Player.Player;
+import it.unicam.cs.formula1Classes.Track.RaceTrack;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -37,29 +38,31 @@ class GameCheckerTest {
 
     @Test
     void checkWin() {
-        Controller c = new Controller(new Bot(new Car(5,30)));
-        GameChecker g = new GameChecker(new Controller[]{c});
+        Player c = new Bot(new Car(5,30));
+        GameChecker g = new GameChecker(new Player[]{c});
+        RaceTrack track= new RaceTrack();
         c.getCar().move(Directions.RIGHT);
         System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
         c.getCar().move(Directions.RIGHT);
         System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
         c.getCar().move(Directions.RIGHT);
         System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
-        assertFalse(g.checkWin(c));
+        assertFalse(g.checkWin(c,track,15));
         c.getCar().move(Directions.UP_RIGHT);
         System.out.println(c.getCar().getCoordinates()[0]+" "+c.getCar().getCoordinates()[1]);
-        assertTrue(g.checkWin(c));
+        assertTrue(g.checkWin(c,track,15));
 
     }
 
     @Test
     void getValidMoves() {
-        Controller c = new Controller(new Bot(new Car(5,30)));
-        GameChecker g = new GameChecker(new Controller[]{c});
-        assertEquals(9,g.getValidMoves(c).size());
+        Player c = new Bot(new Car(5,30));
+        RaceTrack track= new RaceTrack();
+        GameChecker g = new GameChecker(new Player[]{c});
+        assertEquals(9,g.getValidMoves(c,track).size());
         c.getCar().move(Directions.DOWN_RIGHT);
-        assertEquals(3,g.getValidMoves(c).size());
+        assertEquals(3,g.getValidMoves(c,track).size());
         c.getCar().move(Directions.UP_RIGHT);
-        assertEquals(6,g.getValidMoves(c).size());
+        assertEquals(6,g.getValidMoves(c,track).size());
     }
 }

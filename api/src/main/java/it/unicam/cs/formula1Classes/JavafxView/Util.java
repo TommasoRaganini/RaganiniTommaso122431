@@ -23,66 +23,68 @@
  */
 
 package it.unicam.cs.formula1Classes.JavafxView;
-import it.unicam.cs.formula1Classes.Player.Controller;
+import it.unicam.cs.formula1Classes.Player.HumanPlayer;
+import it.unicam.cs.formula1Classes.Player.Player;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.util.List;
 
-public record Util() {
+public class Util {
     private static final double CELL_SIZE = 20;
 
-    
+
     public static void drawTrack(String[][] trackMatrix, Pane pane) {
         pane.getChildren().clear(); // Pulisce il pane prima di disegnare il nuovo tracciato
-         for (int i = 0; i < trackMatrix.length; i++) {
+        for (int i = 0; i < trackMatrix.length; i++) {
             for (int j = 0; j < trackMatrix[i].length; j++) {
-                Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
-                cell.setX(j * CELL_SIZE);
-                cell.setY(i * CELL_SIZE);
-                cell.setFill(getColorFromSymbol(trackMatrix[i][j]));
-                pane.getChildren().add(cell);
+                InsertCellColor(trackMatrix, pane, j, i);
             }
         }
     }
+
+    private static void InsertCellColor(String[][] trackMatrix, Pane pane, int j, int i) {
+        Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
+        cell.setX(j * CELL_SIZE);
+        cell.setY(i * CELL_SIZE);
+        cell.setFill(getColorFromSymbol(trackMatrix[i][j]));
+        pane.getChildren().add(cell);
+    }
+
     private static Color getColorFromSymbol(String cell) {
         return switch (cell) {
-            case "S" -> Color.GREEN;
-            case "F" -> Color.RED;
+            case "S" -> Color.GOLD;
+            case "F" -> Color.GREEN;
+            case "C" -> Color.BLUE;
             case "p" -> Color.GRAY;
             default -> Color.WHITE;
         };
     }
-    public static void updateTrack(Controller[] controllers, String[][] trackMatrix, Pane pane) {
-        drawTrack(trackMatrix, pane);
-        for (Controller c : controllers) {
+
+    public static void updateTrack(Player[] players, String[][] trackMatrix, Pane pane) {
+        for (Player c : players) {
             int[] coordinates = c.getCarCoordinates();
-            Text carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "C");
-            carText.setX(coordinates[1] * CELL_SIZE + CELL_SIZE / 4); // Centra il testo orizzontalmente nella cella
-            carText.setY(coordinates[0] * CELL_SIZE + CELL_SIZE * 0.75); // Centra il testo verticalmente nella cella
+            int[] oldCoordinates = c.getPreviousCarCoordinates();
+            if (oldCoordinates != null) {
+                InsertCellColor(trackMatrix, pane, oldCoordinates[1], oldCoordinates[0]);
+            }
+            Text carText = getText(c, coordinates);
             pane.getChildren().add(carText);
         }
     }
 
-
-
-    /**
-     * This method checks if a car is in a certain position
-     *
-     * @param controllers the controllers of the game
-     * @param i the row of the position
-     * @param j the column of the position
-     * @return true if a car is in the position, false otherwise
-     */
-    private static boolean CarPos(Controller[] controllers, int i, int j) {
-        for (Controller c : controllers) {
-            if (c.getCarCoordinates()[0] == i && c.getCarCoordinates()[1] == j) {
-                return true;
-            }
+    private static Text getText(Player c, int[] coordinates) {
+        Text carText;
+        if (c instanceof HumanPlayer) {
+            carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "P"+ c.getPlayerId());
+        } else {
+            carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "B"+ c.getPlayerId());
         }
-        return false;
+        carText.setX(coordinates[1] * CELL_SIZE + CELL_SIZE / 4); // Centra il testo orizzontalmente nella cella
+        carText.setY(coordinates[0] * CELL_SIZE + CELL_SIZE * 0.75); // Centra il testo verticalmente nella cella
+        return carText;
     }
+
 
 }

@@ -24,60 +24,117 @@
 
 package it.unicam.cs.formula1Classes.JavafxView;
 
-import it.unicam.cs.formula1Classes.GameEngine.Game;
-import it.unicam.cs.formula1Classes.Player.Controller;
+import it.unicam.cs.formula1Classes.GameEngine.GameLauncher;
 import it.unicam.cs.formula1Classes.Player.Directions;
+import it.unicam.cs.formula1Classes.Player.Player;
 import it.unicam.cs.formula1Classes.Track.TrackGenerator;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import java.net.URL;
 import java.util.List;
-
-public class GraphicController implements GameUIUpdater {
-
+import java.util.ResourceBundle;
+/**
+ * Controller class for managing the graphical user interface of the Formula 1 game.
+ * This class handles user interactions, updates the UI based on game state, and initializes
+ * the game components.
+ */
+public class GraphicController implements GameUIUpdater,Initializable {
+    @FXML
+    private Label RulesLabel;
+    @FXML
+    private Label WinnerText;
+    @FXML
+    private Label InsertLabel;
+    @FXML
+    private Label NoteLabel;
+    @FXML
+    private Label WarningLabel;
     @FXML
     private Button startButton;
     @FXML
-    private Label welcomeText;
+    private Button moveButton;
     @FXML
     private Pane PaneTrack;
     @FXML
     private ChoiceBox<Directions> moves;
     @FXML
-    private Button moveButton;
+    private ChoiceBox<Integer> numPLayers;
 
+    private final MoveListener moveListener;
+
+    public GraphicController() {
+        this.moveListener = new MoveViewController();
+    }
 
     @FXML
     void onButtonStartGame() {
-        Game gameEngine = new Game(this);
-        gameEngine.startGame();
+        new Thread(() -> {
+            Integer numPlayers = getNumPlayers(); // Recupera il numero di giocatori selezionato
+            if (numPlayers == null) {
+                Platform.runLater(() -> setInsertLabel("Please select the number of players."));
+                return;
+            }
+            setComponents();
+            GameLauncher gameEngine = new GameLauncher(this, moveListener);
+            gameEngine.launchGame();
+        }).start();
     }
 
-    public void initialize(){
+    private void setComponents() {
+        setInsertLabel("");
+        NoteLabel.setVisible(true);
+        moves.setVisible(true);
+        moveButton.setVisible(true);
+        WarningLabel.setVisible(false);
+        numPLayers.setVisible(false);
+        startButton.setVisible(false);
+        RulesLabel.setVisible(false);
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         String[][] trackMatrix =TrackGenerator.generateTrack();
         Util.drawTrack(trackMatrix, PaneTrack);
+        Platform.runLater(this::setNumPlayers);
     }
 
-    public void updateTrackUI(String[][] trackMatrix, Controller[] controllers) {
-        Util.updateTrack(controllers, trackMatrix, PaneTrack);
+    public void updateTrackUI(String[][] trackMatrix, Player[] players) {
+        Platform.runLater(() -> Util.updateTrack(players, trackMatrix, PaneTrack));
+    }
+
+    public void updateWinnerUI(Player player){
+        Platform.runLater(() -> WinnerText.setText("The winner is: " + player.toString()));
     }
 
     public void updateMovesChoiceBox(List<Directions> validMoves) {
-        moves.getItems().clear(); // Pulisce le mosse precedenti
-        moves.getItems().addAll(validMoves); // Aggiunge le nuove mosse
-        if (!validMoves.isEmpty()) {
-            moves.getSelectionModel().selectFirst(); // Seleziona la prima mossa valida per default
-        }
+        Platform.runLater(() -> {
+            moves.getItems().clear();
+            moves.getItems().addAll(validMoves);
+        });
     }
+
     @FXML
     void onButtonMove() {
         Directions selectedMove = moves.getSelectionModel().getSelectedItem();
+        moveListener.onMoveSelected(selectedMove);
     }
 
-
-    public Pane getPaneTrack() {
-        return PaneTrack;
+    public void setInsertLabel(String message){
+        Platform.runLater(() -> InsertLabel.setText(message));
     }
+
+    public void setNumPlayers(){
+        numPLayers.getItems().clear();
+        numPLayers.getItems().addAll(1,2,3,4,5);
+    }
+
+    public Integer getNumPlayers(){
+        return numPLayers.getSelectionModel().getSelectedItem();
+    }
+
 }

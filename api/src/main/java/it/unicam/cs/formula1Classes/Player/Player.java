@@ -24,20 +24,71 @@
 
 package it.unicam.cs.formula1Classes.Player;
 
+import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
+
 import java.util.List;
 
 /**
  * This interface represents the player of the game
  */
-public interface Player {
+public abstract class Player {
+    private final Car car;
+    private final int playerId;
 
-    Car getCar();
+
+    public Player(Car car, int playerId) {
+        this.car = car;
+        this.playerId = playerId;
+    }
+    public Car getCar(){
+        return car;
+    }
     /**
      * This method moves the car of the player in a random direction
      * @param moves the list of moves allowed for the car
+     * @param updater the object that updates the UI
      */
-    void move(List<Directions> moves);
+    public abstract void move(List<Directions> moves, GameUIUpdater updater);
 
-    String toString();
+
+    /**
+     * This method checks if the car of the player can move in the direction chosen
+     * @param moves the list of moves allowed for the car
+     * @return true if the car can move, false otherwise
+     */
+    public boolean checkAllowedMoves(List<Directions> moves) {
+        boolean allowed = moves.isEmpty();
+        if (allowed) {
+            getCar().getVector().setModule(0, 0);
+        }
+        return allowed;
+    }
+
+    public int getPlayerId() {
+        return playerId;
+    }
+
+    @Override
+    public abstract String toString();
+
+    public int[] getCarCoordinates() {
+        return getCar().getCoordinates();
+    }
+
+    public int[] getPreviousCarCoordinates() {
+        return getCar().getPreviousCoordinates();
+    }
+
+    public void removeLastPosition() {
+        getCar().removeLastPosition();
+    }
+
+    public void setCheckPoint(boolean checkPoint) {
+        getCar().setCheckPoint(checkPoint);
+    }
+
+    public boolean getCheckPoint() {
+        return getCar().getCheckPoint();
+    }
 
 }

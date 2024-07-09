@@ -24,30 +24,40 @@
 
 package it.unicam.cs.formula1Classes.GameEngine;
 
-import it.unicam.cs.formula1Classes.Player.Directions;
+import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
+import it.unicam.cs.formula1Classes.JavafxView.MoveListener;
 import it.unicam.cs.formula1Classes.Player.Player;
 import it.unicam.cs.formula1Classes.Track.IRaceTrack;
+import it.unicam.cs.formula1Classes.Track.RaceTrack;
 
-import java.util.List;
 /**
- * This interface is used to effettuate all the checks of the game
+ * This class launches the game
  */
-public interface IChecker {
-    /**
-     * This method checks if the game is over
-     *
-     * @param p the controller that is being checked
-     * @return true if the game is over, false otherwise
-     */
-    boolean checkWin(Player p, IRaceTrack t, int round);
-    /**
-     * This method returns a list of valid moves for the car
-     *
-     * @param p the controller of the game
-     * @return a list of valid moves for the car
-     */
-    List<Directions> getValidMoves(Player p, IRaceTrack t);
+public class GameLauncher {
+    private final Game game;
 
+    public GameLauncher(GameUIUpdater updater, MoveListener moveListener) {
+        IRaceTrack track = new RaceTrack();
+        Player[] players = setupPlayers(moveListener,updater);
+        IChecker checker = new GameChecker(players);
+        this.game = new Game(updater, track, checker, players);
+    }
+    /**
+     * This method launches the game
+     */
+    public void launchGame() {
+        game.startGame();
+    }
 
+    /**
+     * This method initializes the players
+     *
+     * @param moveListener the move listener
+     * @return the players
+     */
+    private Player[] setupPlayers(MoveListener moveListener, GameUIUpdater updater) {
+        GameSetup setup = new GameSetup(updater);
+        return setup.initGame(moveListener);
+    }
 
 }

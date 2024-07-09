@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * This class represents the RaceTrack of the game
  */
-public class RaceTrack {
+public class RaceTrack implements IRaceTrack{
     private final String[][] track;
     private final List<Position> startLine;
     private final List<Position> finishLine;
@@ -43,8 +43,7 @@ public class RaceTrack {
      * Constructor for the RaceTrack class.
      */
     public RaceTrack() {
-        TrackGenerator trackGenerator = new TrackGenerator();
-        this.track = trackGenerator.generateTrack();
+        this.track = TrackGenerator.generateTrack();
         this.rows = track.length;
         this.columns = track[0].length;
         this.startLine = getStartAndFinishLine("S");

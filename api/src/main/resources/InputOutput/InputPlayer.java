@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-package it.unicam.cs.formula1Classes.InputOutput;
+package InputOutput;
 
 import it.unicam.cs.formula1Classes.Player.Directions;
 

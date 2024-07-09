@@ -24,6 +24,9 @@
 
 package it.unicam.cs.formula1Classes;
 
+import it.unicam.cs.formula1Classes.Player.Bot;
+import it.unicam.cs.formula1Classes.Player.Car;
+import it.unicam.cs.formula1Classes.Player.Player;
 import it.unicam.cs.formula1Classes.Track.RaceTrack;
 import it.unicam.cs.formula1Classes.GameEngine.ResearchPath;
 import it.unicam.cs.formula1Classes.Player.Position;
@@ -38,11 +41,12 @@ class ResearchPathTest {
         RaceTrack track = new RaceTrack();
         String[][] track1 = track.getTrack();
         Position start = new Position(4, 35);
+        Player player = new Bot(new Car(start));
         Position end = new Position(3, 36);
-        assertFalse(ResearchPath.searchPath(track1, start, end));
+        assertFalse(ResearchPath.searchPath(track1, start, end, player));
         Position start1 = new Position(4, 35);
         Position end1 = new Position(3, 37);
-        assertTrue(ResearchPath.searchPath(track1, start1, end1));
+        assertTrue(ResearchPath.searchPath(track1, start1, end1, player));
 
 
 

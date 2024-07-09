@@ -24,31 +24,43 @@
 
 package it.unicam.cs.formula1Classes.Player;
 
-import it.unicam.cs.formula1Classes.InputOutput.InputPlayer;
+
+import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
+import it.unicam.cs.formula1Classes.JavafxView.MoveListener;
 
 import java.util.List;
 
-public class HumanPlayer implements Player {
-    private final Car car;
-    private static int id = 1;
-    private final int playerId = id++;
-    private final InputPlayer inputPlayer = new InputPlayer();
+public class HumanPlayer extends Player {
+    private final MoveListener moveListener;
+    private static int idPl = 1;
 
-    public HumanPlayer(Car car) {
-        this.car = car;
+    public HumanPlayer(Car car, MoveListener moveListener) {
+        super(car,idPl++);
+        this.moveListener = moveListener;
+
     }
 
     public Car getCar() {
-        return car;
+        return super.getCar();
     }
 
     @Override
-    public void move(List<Directions> moves) {
-        car.move(inputPlayer.getDirection(moves));
+    public void move(List<Directions> moves, GameUIUpdater updater) {
+        try {
+            moveListener.waitForMoveSelection();
+            if (checkAllowedMoves(moves))
+                return;
+            updater.setInsertLabel(this + " has moved");
+            getCar().move(moveListener.getDirection());
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            System.out.println("Move interrupted: " + e.getMessage());
+        }
     }
 
     @Override
     public String toString() {
-        return "Player" + playerId;
+        return "Player" + getPlayerId();
     }
+
 }

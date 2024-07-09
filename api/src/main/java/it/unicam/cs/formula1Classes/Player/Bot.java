@@ -24,39 +24,49 @@
 
 package it.unicam.cs.formula1Classes.Player;
 
+import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
+
 import java.util.List;
 import java.util.Random;
+
 /**
  * This class represents the bot player
  */
-public class Bot implements Player {
-    private final Car car;
+public class Bot extends Player {
     private final Random random;
-    private static int id = 1;
-    private final int botId;
-
+    private static int idBot = 1;
 
     public Bot(Car car) {
-        this.car = car;
+        super(car, idBot++);
         this.random = new Random();
-        this.botId = id++;
     }
 
     public Car getCar() {
-        return car;
+        return super.getCar();
     }
 
     @Override
-    public void move(List<Directions> moves) {
+    public void move(List<Directions> moves, GameUIUpdater updater) {
+        if(checkAllowedMoves(moves))
+            return;
         Directions[] directions = moves.toArray(new Directions[0]);
         Directions randomDirection = directions[random.nextInt(directions.length)];
-        System.out.println("Bot"+botId+" moved " + randomDirection);
-        this.car.move(randomDirection);
+        super.getCar().move(randomDirection);
+    }
+    public void move(List<Directions> moves){
+        if(moves.isEmpty()) {
+            super.getCar().getVector().setModule(0, 0);
+            return;
+        }
+        Directions[] directions = moves.toArray(new Directions[0]);
+        Directions randomDirection = directions[random.nextInt(directions.length)];
+        super.getCar().move(randomDirection);
     }
 
     @Override
     public String toString() {
-        return "Bot"+botId;
+        return "Bot" + getPlayerId();
     }
+
 
 }

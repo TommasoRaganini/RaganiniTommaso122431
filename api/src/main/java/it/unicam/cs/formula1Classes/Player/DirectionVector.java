@@ -65,6 +65,8 @@ public abstract class DirectionVector {
      */
     public int[] updateModule(Directions direction) {
         int[] d = directionMap.get(direction);
+        if(d == null)
+            return this.module;
         this.module[0] += d[0];
         this.module[1] += d[1];
         return this.module;

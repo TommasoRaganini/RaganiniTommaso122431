@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="it.unicam.cs.formula1">
+    <output-path>$PROJECT_DIR$/out/artifacts/it_unicam_cs_formula1</output-path>
+    <root id="root">
+      <element id="archive" name="it_unicam_cs_formula1.jar">
+        <element id="module-output" name="it.unicam.cs.formula1" />
+      </element>
+    </root>
+  </artifact>
+</component>

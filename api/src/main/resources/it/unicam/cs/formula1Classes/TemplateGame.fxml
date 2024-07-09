@@ -40,27 +40,35 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.unicam.cs.formula1Classes.JavafxView.GraphicController">
-   <children>
-      <Pane fx:id="PaneTrack" layoutX="-39.0" layoutY="3.0" prefHeight="562.0" prefWidth="1110.0" />
-      <Button fx:id="startButton" layoutX="25.0" layoutY="571.0" mnemonicParsing="false" onAction="#onButtonStartGame" prefHeight="38.0" prefWidth="104.0" text="Start" />
-      <Label fx:id="WinnerText" layoutX="145.0" layoutY="571.0" prefHeight="38.0" prefWidth="290.0">
-         <font>
-            <Font size="20.0" />
-         </font></Label>
-      <Button fx:id="moveButton" layoutX="734.0" layoutY="577.0" mnemonicParsing="false" onAction="#onButtonMove" prefHeight="26.0" prefWidth="104.0" text="Move" visible="false" />
-      <ChoiceBox fx:id="moves" layoutX="473.0" layoutY="571.0" prefHeight="38.0" prefWidth="202.0" visible="false" />
-      <Label fx:id="NoteLabel" layoutX="476.0" layoutY="623.0" prefHeight="50.0" prefWidth="397.0" text="Note: If you go offTrack, you'll have no available moves for one turn" visible="false" />
-      <Label fx:id="RulesLabel" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="9.0" layoutY="619.0" prefHeight="185.0" prefWidth="464.0" text="Welcome to the f1 Race. &#10;RULES:&#10;In this race, the goal is to reach the finish line before the other players.&#10;To move, select the direction from the ChoiceBox and then press the Move button. Be careful with the curves!&#10;One last thing: To prevent cheating, you are forced to go right on the first turn. You also have to reach the checkpoint to win.&#10;Now enter the number of interactive players you want to play with, then press the Start button to begin playing.&#10;Good Luck!!!&#10;" textAlignment="JUSTIFY" wrapText="true">
-         <effect>
-            <InnerShadow />
-         </effect>
-         <font>
-            <Font name="ArtifaktElement-Regular" size="12.0" />
-         </font>
-      </Label>
-      <Label fx:id="InsertLabel" layoutX="857.0" layoutY="571.0" prefHeight="38.0" prefWidth="230.0" />
-      <ChoiceBox fx:id="numPLayers" layoutX="488.0" layoutY="712.0" prefHeight="26.0" prefWidth="150.0" />
-      <Label fx:id="WarningLabel" layoutX="649.0" layoutY="691.0" prefHeight="98.0" prefWidth="338.0" text="Note:&#10;If you exceed the maximum number of five players, &#10;including the number of bots specified in the file giocatori.txt, &#10;the program will close.&#10;&#10;So be careful with your choice!" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+            prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="it.unicam.cs.formula1Classes.JavafxView.GraphicController">
+   <Pane fx:id="PaneTrack" layoutX="-39.0" layoutY="3.0" prefHeight="562.0" prefWidth="1110.0"/>
+   <Button fx:id="startButton" layoutX="25.0" layoutY="571.0" mnemonicParsing="false" onAction="#onButtonStartGame"
+           prefHeight="38.0" prefWidth="104.0" text="Start"/>
+   <Label fx:id="WinnerText" layoutX="145.0" layoutY="571.0" prefHeight="38.0" prefWidth="290.0">
+      <font>
+         <Font size="20.0"/>
+      </font>
+   </Label>
+   <Button fx:id="moveButton" layoutX="734.0" layoutY="577.0" mnemonicParsing="false" onAction="#onButtonMove"
+           prefHeight="26.0" prefWidth="104.0" text="Move" visible="false"/>
+   <ChoiceBox fx:id="moves" layoutX="473.0" layoutY="571.0" prefHeight="38.0" prefWidth="202.0" visible="false"/>
+   <Label fx:id="NoteLabel" layoutX="476.0" layoutY="623.0" prefHeight="50.0" prefWidth="397.0"
+          text="Note: If you go offTrack, you'll have no available moves for one turn" visible="false"/>
+   <Label fx:id="RulesLabel" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="9.0" layoutY="619.0" prefHeight="185.0"
+          prefWidth="464.0"
+          text="Welcome to the f1 Race. &#10;RULES:&#10;In this race, the goal is to reach the finish line before the other players.&#10;To move, select the direction from the ChoiceBox and then press the Move button. Be careful with the curves!&#10;One last thing: To prevent cheating, you are forced to go right on the first turn. You also have to reach the checkpoint to win.&#10;Now enter the number of interactive players you want to play with, then press the Start button to begin playing.&#10;Good Luck!!!&#10;"
+          textAlignment="JUSTIFY" wrapText="true">
+      <effect>
+         <InnerShadow/>
+      </effect>
+      <font>
+         <Font name="ArtifaktElement-Regular" size="12.0"/>
+      </font>
+   </Label>
+   <Label fx:id="InsertLabel" layoutX="857.0" layoutY="571.0" prefHeight="38.0" prefWidth="230.0"/>
+   <ChoiceBox fx:id="numPLayers" layoutX="488.0" layoutY="712.0" prefHeight="26.0" prefWidth="150.0"/>
+   <Label fx:id="WarningLabel" layoutX="649.0" layoutY="691.0" prefHeight="98.0" prefWidth="338.0"
+          text="Note:&#10;If you exceed the maximum number of five players, &#10;including the number of bots specified in the file giocatori.txt, &#10;the program will close.&#10;&#10;So be careful with your choice!"/>
 </AnchorPane>

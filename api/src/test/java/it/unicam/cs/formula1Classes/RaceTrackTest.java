@@ -50,9 +50,8 @@ class RaceTrackTest {
 
     @Test
     void getTrack() {
-        TrackGenerator trackGenerator = new TrackGenerator();
         RaceTrack raceTrack = new RaceTrack();
-        String[][] track = trackGenerator.generateTrack();
+        String[][] track = TrackGenerator.generateTrack();
         for(int i = 0; i < track.length; i++){
             for(int j = 0; j < track[i].length; j++){
                 assertEquals(track[i][j],raceTrack.getTrackPosition(i,j));

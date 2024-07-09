@@ -62,36 +62,12 @@ public class RaceTrack implements IRaceTrack{
         for (int i = 0; i < this.rows; i++) {
             for (int j = 0; j < this.columns; j++) {
                 if (this.track[i][j].equals(s)) {
-                    StartAndFinishLine = breaksearch(i, j, s, StartAndFinishLine);
-                    return StartAndFinishLine;
+                    StartAndFinishLine.add(new Position(i, j));
                 }
             }
         }
-        return null;
+        return StartAndFinishLine;
     }
-
-    /**
-     * This is a support method for the getStartAndFinishLine method which semplifies the search
-     * by searching the line on the same column then breaks the search when the line ends
-     *
-     * @param i      the row
-     * @param j      the column
-     * @param s      the string to search
-     * @param SFLine the list of the start or finish line
-     * @return the list of the start or finish line
-     */
-    public ArrayList<Position> breaksearch(int i, int j, String s, ArrayList<Position> SFLine) {
-        for (int k = i; k < this.rows; k++) {
-            if (this.track[i][j].equals(s)) {
-                SFLine.add(new Position(i, j));
-                i++;
-            } else {
-                break;
-            }
-        }
-        return SFLine;
-    }
-
 
     public int getColumns() {
         return columns;

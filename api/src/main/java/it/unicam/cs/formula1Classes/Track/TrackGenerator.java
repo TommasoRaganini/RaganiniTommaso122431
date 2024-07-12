@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class TrackGenerator {
 
-    private static final FIleIOtrack f= new FIleIOtrack();
+    private static final FIleIOtrack f = new FIleIOtrack();
 
     /**
      * Generates the racetrack layout from a file.
@@ -59,6 +59,7 @@ public class TrackGenerator {
         }
         return track;
     }
+
     /**
      * Counts the number of rows and columns in the track layout.
      * This method is used to determine the dimensions of the track based on the content of the file.
@@ -71,8 +72,6 @@ public class TrackGenerator {
         int columns = lines.getFirst().length();
         return new int[]{rows, columns};
     }
-
-
 
 
 }

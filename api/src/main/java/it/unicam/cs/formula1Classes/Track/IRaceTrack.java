@@ -33,9 +33,26 @@ import java.util.List;
  * Provides methods to access the track layout, start and finish lines, and dimensions.
  */
 public interface IRaceTrack {
+    /**
+     * Retrieves the layout of the racetrack as a 2D array of strings.
+     * Each string represents a specific grid coordinate on the track and can contain different symbols to represent different track elements (e.g., road, checkpoint, finishline).
+     *
+     * @return A 2D array of strings representing the track layout.
+     */
     String[][] getTrack();
+    /**
+     * Retrieves the number of rows in the racetrack grid.
+     *
+     * @return The number of rows in the racetrack grid.
+     */
     int getRows();
+    /**
+     * Retrieves the number of columns in the racetrack grid.
+     *
+     * @return The number of columns in the racetrack grid.
+     */
     int getColumns();
+
     /**
      * Retrieves the positions of the start line on the racetrack.
      * This method is crucial for setting up the initial positions of the cars at the beginning of the race.
@@ -43,6 +60,7 @@ public interface IRaceTrack {
      * @return A list of {@link Position} objects representing the start line positions. Each position indicates a specific grid coordinate on the track where a car can be placed at the start of the race.
      */
     List<Position> getStartLine();
+
     /**
      * Retrieves the positions of the finish line on the racetrack.
      * This method is crucial for determining when a car has completed a lap and crossed the finish line.

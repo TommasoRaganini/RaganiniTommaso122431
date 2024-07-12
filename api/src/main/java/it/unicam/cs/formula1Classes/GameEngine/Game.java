@@ -46,12 +46,12 @@ public class Game {
      * Constructs a new Game instance with specified UI updater, track, checker, and players.
      *
      * @param updater The interface for updating the game UI.
-     * @param track The racetrack where the game takes place.
+     * @param track   The racetrack where the game takes place.
      * @param checker The checker used to determine game outcomes.
      * @param players The array of players participating in the game.
      */
     public Game(GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
-        this.track= track;
+        this.track = track;
         this.players = players;
         this.checker = checker;
         this.updater = updater;
@@ -73,6 +73,7 @@ public class Game {
             playRound();
         }
     }
+
     /**
      * Plays a single round of the game.
      * It iterates through each player, allowing them to take their turn based on the current strategy.

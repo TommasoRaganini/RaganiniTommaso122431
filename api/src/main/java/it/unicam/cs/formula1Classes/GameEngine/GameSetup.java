@@ -40,28 +40,47 @@ public class GameSetup {
     private final FIleIOtrack fIleIOtrack = new FIleIOtrack();
     private final int numPlayers = fIleIOtrack.getPlayersNumber();
     private final int numHumPl;
+
+    /**
+     * This is the constructor of the class GameSetup
+     *
+     * @param updater the updater of the game
+     */
     public GameSetup(GameUIUpdater updater) {
         this.numHumPl = updater.getNumPlayers();
-        this.players = new Player[numPlayers+numHumPl];
+        this.players = new Player[numPlayers + numHumPl];
     }
+
     /**
      * This method initializes the game
+     *
+     * @param moveListener the listener of the moves
      * @return the controllers of the game
      */
     public Player[] initGame(MoveListener moveListener) {
         IRaceTrack raceTrack = new RaceTrack();
         List<Position> positions = raceTrack.getStartLine();
-            if (this.numHumPl + this.numPlayers > 5) {
-                System.out.println("The number of players is too high");
-                System.exit(0);
-            }
-            for (int n = 0; n < this.numHumPl; n++) {
-                players[n] =new HumanPlayer(new Car(positions.get(n)), moveListener);
-            }
-            for (int i = this.numHumPl; i < this.numPlayers+this.numHumPl; i++) {
-            players[i] =new Bot(new Car(positions.get(i)));
-             }
+        if (this.numHumPl + this.numPlayers > positions.size()) {
+            System.out.println("The number of players is too high");
+            System.exit(0);
+        }
+        iterationInit(moveListener, positions);
         return players;
+    }
+
+    /**
+     * This is a support method for the initialization of the game
+     *
+     * @param moveListener the listener of the moves
+     * @param positions    the positions of the players
+     */
+    private void iterationInit(MoveListener moveListener, List<Position> positions) {
+        for (int n = 0; n < this.numHumPl; n++) {
+            players[n] = new HumanPlayer(new Car(positions.get(n)), moveListener);
+        }
+        for (int i = this.numHumPl; i < this.numPlayers + this.numHumPl; i++) {
+            players[i] = new Bot(new Car(positions.get(i)));
+        }
     }
 
 }

@@ -36,18 +36,20 @@ public interface IChecker {
     /**
      * This method checks if the game is over
      *
-     * @param p the controller that is being checked
+     * @param p     the controller that is being checked
+     * @param t     the track of the game
+     * @param round the current round of the game
      * @return true if the game is over, false otherwise
      */
     boolean checkWin(Player p, IRaceTrack t, int round);
+
     /**
      * This method returns a list of valid moves for the car
      *
      * @param p the controller of the game
+     * @param t the track of the game
      * @return a list of valid moves for the car
      */
     List<Directions> getValidMoves(Player p, IRaceTrack t);
-
-
 
 }

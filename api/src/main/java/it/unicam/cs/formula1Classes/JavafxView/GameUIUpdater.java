@@ -39,7 +39,7 @@ public interface GameUIUpdater {
      * Updates the UI to reflect the current state of the track and player positions.
      *
      * @param trackMatrix A 2D array representing the current state of the track.
-     * @param players An array of Player objects representing the current positions of the players.
+     * @param players     An array of Player objects representing the current positions of the players.
      */
     void updateTrackUI(String[][] trackMatrix, Player[] players);
 

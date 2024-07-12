@@ -30,7 +30,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-
+/**
+ * This class contains utility methods for the JavaFX view of the game.
+ */
 public class Util {
     private static final double CELL_SIZE = 20;
 
@@ -103,6 +105,7 @@ public class Util {
             pane.getChildren().add(carText);
         }
     }
+
     /**
      * Creates a text label for a player based on their type and position.
      * The label contains the player's type and ID.
@@ -114,14 +117,12 @@ public class Util {
     private static Text getText(Player c, int[] coordinates) {
         Text carText;
         if (c instanceof HumanPlayer) {
-            carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "P"+ c.getPlayerId());
+            carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "P" + c.getPlayerId());
         } else {
-            carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "B"+ c.getPlayerId());
+            carText = new Text(coordinates[1] * CELL_SIZE, coordinates[0] * CELL_SIZE + CELL_SIZE / 2, "B" + c.getPlayerId());
         }
         carText.setX(coordinates[1] * CELL_SIZE + CELL_SIZE / 4); // Centra il testo orizzontalmente nella cella
         carText.setY(coordinates[0] * CELL_SIZE + CELL_SIZE * 0.75); // Centra il testo verticalmente nella cella
         return carText;
     }
-
-
 }

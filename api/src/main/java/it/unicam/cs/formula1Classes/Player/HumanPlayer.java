@@ -40,24 +40,19 @@ public class HumanPlayer extends Player {
     /**
      * Constructs a new HumanPlayer with a specified car and move listener.
      *
-     * @param car The car assigned to the player.
+     * @param car          The car assigned to the player.
      * @param moveListener The listener for move events.
      */
     public HumanPlayer(Car car, MoveListener moveListener) {
-        super(car,idPl++);
+        super(car, idPl++);
         this.moveListener = moveListener;
 
     }
-
-    public Car getCar() {
-        return super.getCar();
-    }
-
     /**
      * Performs a move operation for the player. This method waits for a move selection from the GUI,
      * checks if the moves are allowed, and then updates the game UI accordingly.
      *
-     * @param moves The list of possible moves.
+     * @param moves   The list of possible moves.
      * @param updater The game UI updater to reflect changes.
      */
     @Override

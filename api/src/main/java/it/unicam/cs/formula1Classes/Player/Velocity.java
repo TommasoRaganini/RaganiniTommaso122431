@@ -29,11 +29,16 @@ package it.unicam.cs.formula1Classes.Player;
  * that extends the DirectionVector abstract class
  */
 public class Velocity extends DirectionVector {
+    /**
+     * Constructor of the class Velocity that calls the constructor of the superclass DirectionVector
+     */
     public Velocity() {
         super();
     }
+
     /**
      * This method calculates the velocity of the car using the Pythagorean theorem
+     *
      * @return the velocity of the car
      */
     public double getVelocity() {

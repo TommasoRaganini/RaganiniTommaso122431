@@ -37,7 +37,7 @@ public class Car {
     private final Velocity vector;
     private boolean checkPoint = false;
 
-    /**
+    /**The constructor of the class Car
      * @param y the y coordinate of the car
      * @param x the x coordinate of the car
      *          creates a car object with a path and a velocity vector
@@ -47,9 +47,10 @@ public class Car {
         this.path.add(new Position(y, x));
         this.vector = new Velocity();
     }
-    /**
+
+    /**An overloaded constructor of the class Car that takes a Position object as parameter
      * @param position the position of the car
-     *          creates a car object with a path and a velocity vector
+     *                 creates a car object with a path and a velocity vector
      */
     public Car(Position position) {
         this.path = new ArrayList<>();
@@ -57,16 +58,20 @@ public class Car {
         this.vector = new Velocity();
     }
 
-
+    /**This method sets the checkPoint attribute of the car
+     * @param checkPoint the value to set the checkPoint attribute to
+     */
     public void setCheckPoint(boolean checkPoint) {
         this.checkPoint = checkPoint;
     }
-
+    /**This method returns the checkPoint attribute of the car
+     * @return the checkPoint attribute of the car
+     */
     public boolean getCheckPoint() {
         return this.checkPoint;
     }
 
-    /**
+    /**This method moves the car according to the direction selected
      * @param direction modifies the position of the car according to the direction vector
      */
     public void move(Directions direction) {
@@ -78,29 +83,58 @@ public class Car {
         this.path.add(newPosition);
     }
 
+    /**
+     * Returns the actual coordinates of the car
+     *
+     * @return the coordinates of the car
+     */
     public int[] getCoordinates() {
         return new int[]{this.path.getLast().getY(), this.path.getLast().getX()};
     }
 
+    /**
+     * Returns the last position of the car
+     *
+     * @return the last position of the car
+     */
     public Position getPosition() {
         return this.path.getLast();
     }
 
+    /**
+     * Returns the path made by a List of positions of the car during the race
+     *
+     * @return the path of the car
+     */
     public ArrayList<Position> getPath() {
         return this.path;
     }
 
+    /**
+     * Returns the velocity vector of the car
+     *
+     * @return the velocity vector of the car
+     */
     public Velocity getVector() {
         return this.vector;
     }
 
+    /**
+     * Returns the previous coordinates of the car
+     *
+     * @return the previous coordinates of the car
+     */
     public int[] getPreviousCoordinates() {
         if (this.path.size() < 2) {
             return new int[]{this.path.getFirst().getY(), this.path.getFirst().getX()};
         }
         return new int[]{this.path.get(this.path.size() - 2).getY(), this.path.get(this.path.size() - 2).getX()};
     }
-    public void removeLastPosition(){
+
+    /**
+     * Removes the last position of the car from the path
+     */
+    public void removeLastPosition() {
         this.path.remove(this.path.getLast());
     }
 }

@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * This class represents the RaceTrack of the game
  */
-public class RaceTrack implements IRaceTrack{
+public class RaceTrack implements IRaceTrack {
     private final String[][] track;
     private final List<Position> startLine;
     private final List<Position> finishLine;
@@ -74,21 +74,23 @@ public class RaceTrack implements IRaceTrack{
     }
 
     /**
+     * Returns the element contained in the cell specified by the given row and column.
      * @param row    the row of the matrix
      * @param column the column of the matrix
      * @return the track position
      */
-    public String getTrackPosition(int row, int column) {
+    public String getTrackPositionElement(int row, int column) {
         return track[row][column];
     }
 
     /**
+     * Set the element in the cell specified by the given row and column.
      * @param row    the row to set
      * @param column the column to set
      * @param value  the value to insert in the cell
      *               {@code @void}  Set the track position
      */
-    public void setTrackPosition(int row, int column, String value) {
+    public void setTrackPositionElement(int row, int column, String value) {
         track[row][column] = value;
     }
 

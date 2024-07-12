@@ -39,26 +39,34 @@ public abstract class Player {
     /**
      * Constructs a Player with a specified car and player ID.
      *
-     * @param car The car assigned to the player.
+     * @param car      The car assigned to the player.
      * @param playerId The unique identifier for the player.
      */
     public Player(Car car, int playerId) {
         this.car = car;
         this.playerId = playerId;
     }
-    public Car getCar(){
+    /**
+     * Returns the car of the player
+     *
+     * @return the car of the player
+     */
+    public Car getCar() {
         return car;
     }
+
     /**
-     * This method moves the car of the player in a random direction
-     * @param moves the list of moves allowed for the car
+     * This method moves the car of the player due to the logic that the player implements for the movement
+     *
+     * @param moves   the list of moves allowed for the car
      * @param updater the object that updates the UI
      */
     public abstract void move(List<Directions> moves, GameUIUpdater updater);
 
 
     /**
-     * This method checks if the car of the player can move in the direction chosen
+     * This method checks if the car of the player went out of the track
+     *
      * @param moves the list of moves allowed for the car
      * @return true if the car can move, false otherwise
      */
@@ -69,30 +77,54 @@ public abstract class Player {
         }
         return allowed;
     }
-
+    /**
+     * Returns the player ID
+     *
+     * @return the player ID
+     */
     public int getPlayerId() {
         return playerId;
     }
 
-    @Override
-    public abstract String toString();
-
+    /**
+     * Returns the actual coordinates of the car
+     *
+     * @return the coordinates of the car
+     */
     public int[] getCarCoordinates() {
         return getCar().getCoordinates();
     }
 
+    /**
+     * Returns the previous coordinates of the car
+     *
+     * @return the previous coordinates of the car
+     */
     public int[] getPreviousCarCoordinates() {
         return getCar().getPreviousCoordinates();
     }
 
+    /**
+     * Removes the last position of the car
+     */
     public void removeLastPosition() {
         getCar().removeLastPosition();
     }
 
+    /**
+     * Sets the check point of the car to true once the car has passed through it
+     *
+     * @param checkPoint the check point of the car
+     */
     public void setCheckPoint(boolean checkPoint) {
         getCar().setCheckPoint(checkPoint);
     }
 
+    /**
+     * Returns the check point of the car
+     *
+     * @return the check point of the car
+     */
     public boolean getCheckPoint() {
         return getCar().getCheckPoint();
     }

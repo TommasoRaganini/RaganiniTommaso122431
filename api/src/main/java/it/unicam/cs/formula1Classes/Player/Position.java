@@ -29,40 +29,59 @@ package it.unicam.cs.formula1Classes.Player;
 public class Position {
     private int x;
     private int y;
-
+    /**
+     * This is the constructor of the class Position
+     *
+     * @param y the y coordinate of the car
+     * @param x the x coordinate of the car
+     */
     public Position(int y, int x) {
         this.y = y;
         this.x = x;
     }
 
     /**
-     * @return the x
+     * Returns the x coordinate of the car
+     *
+     * @return the x coordinate of the car
      */
     public int getX() {
         return x;
     }
 
     /**
-     * @param x the x to set
+     * Sets the x coordinate of the car
+     *
+     * @param x the x coordinate of the car
      */
     public void setX(int x) {
         this.x = x;
     }
 
+
     /**
-     * @return the y
+     * Returns the y coordinate of the car.
+     *
+     * @return the y coordinate
      */
     public int getY() {
         return y;
     }
 
     /**
-     * @param y the y to set
+     * Sets the y coordinate of the car.
+     *
+     * @param y the new y coordinate
      */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * An overridden equals method that compares two Position objects based on their x and y coordinates.
+     * @param obj the object to compare
+     * @return true if the two Position objects are equal, false otherwise
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -76,7 +95,10 @@ public class Position {
     public String toString() {
         return "Position [y=" + y + ", x=" + x + "]";
     }
-
+    /**
+     * An overridden hashCode method that generates a hash code based on the x and y coordinates of the Position object.
+     * @return the hash code of the Position object
+     */
     @Override
     public int hashCode() {
         final int prime = 31;

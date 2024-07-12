@@ -28,9 +28,8 @@ import it.unicam.cs.formula1Classes.JavafxView.GameUIUpdater;
 import it.unicam.cs.formula1Classes.Player.Player;
 import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 /**
- * Implements the strategy for the first round of the game.
- * This strategy dictates specific actions for players during the first round,
- * such as limiting their movement options to a predefined direction.
+ * Implements the strategy pattern for the game engine depending on the current turn.
+ * This interface defines the method that must be implemented by each strategy.
  */
 public interface GameStrategy {
     /**
@@ -38,11 +37,11 @@ public interface GameStrategy {
      * This method is responsible for defining how a player takes their turn,
      * including moving on the track and updating the game state.
      *
-     * @param player The player taking their turn.
+     * @param player  The player taking their turn.
      * @param updater Interface for updating the game UI to reflect changes.
-     * @param track The racetrack where the game is taking place.
+     * @param track   The racetrack where the game is taking place.
      * @param checker The checker used to determine game outcomes.
      * @param players The array of all players participating in the game.
      */
-    void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker,Player[] players);
+    void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players);
 }

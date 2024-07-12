@@ -38,7 +38,7 @@ public class FIleIOtrack {
      * This method reads a file and returns a list of strings
      *
      * @param path String that specifies the path of the file
-     * @return List<String>
+     * @return List of strings
      * @throws Exception if the file is not found or if there is an error while reading it
      */
     public List<String> readFile(String path) throws Exception {
@@ -47,22 +47,23 @@ public class FIleIOtrack {
             if (inputStream == null) {
                 throw new FileNotFoundException("File not found: " + path + ".");
             }
-            return new BufferedReader(new InputStreamReader(inputStream))
-                    .lines().collect(Collectors.toList());
+            return new BufferedReader(new InputStreamReader(inputStream)).lines().collect(Collectors.toList());
         } catch (Exception e) {
             throw new Exception("Error while reading the file: " + e.getMessage());
         }
 
     }
+
     /**
      * This method returns the number of players
-     * from the file giocatori.txt
+     * from the file giocatoriBot.txt
+     *
      * @return int
      */
     public int getPlayersNumber() {
         List<String> lines;
         try {
-            lines = readFile("giocatori.txt");
+            lines = readFile("giocatoriBot.txt");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

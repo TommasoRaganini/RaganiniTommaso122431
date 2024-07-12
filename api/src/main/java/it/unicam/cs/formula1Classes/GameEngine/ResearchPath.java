@@ -39,6 +39,7 @@ public class ResearchPath {
      * @param track the track of the game
      * @param start the starting point
      * @param end   the ending point
+     * @param player the player that is moving
      * @return true if the car had reached or passed the finish line, false otherwise
      */
     public static boolean searchPath(String[][] track, Position start, Position end, Player player) {
@@ -46,11 +47,11 @@ public class ResearchPath {
         Position newEnd = new Position(Math.max(start.getY(), end.getY()), Math.max(start.getX(), end.getX()));
         for (int i = newStart.getY(); i <= newEnd.getY(); i++) {
             for (int j = newStart.getX(); j <= newEnd.getX(); j++) {
-                if(track[i][j].equals("C")) player.setCheckPoint(true);
-                if (track[i][j].equals("F") && player.getCheckPoint()) return true;
+                if (track[i][j].equals("C")) { player.setCheckPoint(true); }
+                if (track[i][j].equals("F") && player.getCheckPoint()) { return true; }
                 if (track[i][j].equals("S")) {
                     player.removeLastPosition();
-                    player.getCar().getVector().setModule(0,0);
+                    player.getCar().getVector().setModule(0, 0);
                     return false;
                 }
             }

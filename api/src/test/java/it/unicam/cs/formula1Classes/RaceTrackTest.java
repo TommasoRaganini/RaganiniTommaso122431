@@ -35,16 +35,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class RaceTrackTest {
 
     @Test
-    void getTrackPosition() {
+    void getTrackPositionElement() {
         RaceTrack raceTrack = new RaceTrack();
-        assertEquals("*",raceTrack.getTrackPosition(0,0));
+        assertEquals("*",raceTrack.getTrackPositionElement(0,0));
     }
 
     @Test
-    void setTrackPosition() {
+    void setTrackPositionElement() {
         RaceTrack raceTrack = new RaceTrack();
-        raceTrack.setTrackPosition(0,0,"*");
-        assertEquals("*",raceTrack.getTrackPosition(0,0));
+        raceTrack.setTrackPositionElement(0,0,"*");
+        assertEquals("*",raceTrack.getTrackPositionElement(0,0));
     }
 
 
@@ -54,7 +54,7 @@ class RaceTrackTest {
         String[][] track = TrackGenerator.generateTrack();
         for(int i = 0; i < track.length; i++){
             for(int j = 0; j < track[i].length; j++){
-                assertEquals(track[i][j],raceTrack.getTrackPosition(i,j));
+                assertEquals(track[i][j],raceTrack.getTrackPositionElement(i,j));
             }
         }
         assertEquals(25,raceTrack.getRows());

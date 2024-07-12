@@ -43,7 +43,7 @@ import java.util.ResourceBundle;
  * This class handles user interactions, updates the UI based on game state, and initializes
  * the game components.
  */
-public class GraphicController implements GameUIUpdater,Initializable {
+public class GraphicController implements GameUIUpdater, Initializable {
     @FXML
     private Label RulesLabel;
     @FXML
@@ -66,7 +66,10 @@ public class GraphicController implements GameUIUpdater,Initializable {
     private ChoiceBox<Integer> numPLayers;
 
     private final MoveListener moveListener;
-
+    /**
+     * Constructor for the GraphicController class.
+     * Initializes the move listener for handling player moves.
+     */
     public GraphicController() {
         this.moveListener = new MoveViewController();
     }
@@ -88,6 +91,7 @@ public class GraphicController implements GameUIUpdater,Initializable {
             gameEngine.launchGame();
         }).start();
     }
+
     /**
      * Sets the visibility and availability of UI components for the game setup.
      */
@@ -101,33 +105,40 @@ public class GraphicController implements GameUIUpdater,Initializable {
         startButton.setVisible(false);
         RulesLabel.setVisible(false);
     }
+
     /**
      * Initializes the controller class.
      * Generates and displays the track on the UI.
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[][] trackMatrix =TrackGenerator.generateTrack();
+        String[][] trackMatrix = TrackGenerator.generateTrack();
         Util.drawTrack(trackMatrix, PaneTrack);
         Platform.runLater(this::setNumPlayers);
     }
+
     /**
      * Updates the track UI with the current positions of the players.
+     *
      * @param trackMatrix The matrix representing the track layout.
-     * @param players The array of players to be displayed on the track.
+     * @param players     The array of players to be displayed on the track.
      */
     public void updateTrackUI(String[][] trackMatrix, Player[] players) {
         Platform.runLater(() -> Util.updateTrack(players, trackMatrix, PaneTrack));
     }
+
     /**
      * Updates the UI to display the winner of the game.
+     *
      * @param player The player who won the game.
      */
-    public void updateWinnerUI(Player player){
+    public void updateWinnerUI(Player player) {
         Platform.runLater(() -> WinnerText.setText("The winner is: " + player.toString()));
     }
+
     /**
      * Updates the UI to display the valid moves for the current player.
+     *
      * @param validMoves The list of valid moves for the current player.
      */
     public void updateMovesChoiceBox(List<Directions> validMoves) {
@@ -136,6 +147,7 @@ public class GraphicController implements GameUIUpdater,Initializable {
             moves.getItems().addAll(validMoves);
         });
     }
+
     /**
      * Handles the action of moving the player.
      * Retrieves the selected move from the UI and notifies the move listener.
@@ -145,26 +157,30 @@ public class GraphicController implements GameUIUpdater,Initializable {
         Directions selectedMove = moves.getSelectionModel().getSelectedItem();
         moveListener.onMoveSelected(selectedMove);
     }
+
     /**
      * Updates the UI to display a message to the user.
+     *
      * @param message The message to be displayed.
      */
-    public void setInsertLabel(String message){
+    public void setInsertLabel(String message) {
         Platform.runLater(() -> InsertLabel.setText(message));
     }
+
     /**
      * Sets the number of players in the choice box for the user to select.
      */
-    public void setNumPlayers(){
+    public void setNumPlayers() {
         numPLayers.getItems().clear();
-        numPLayers.getItems().addAll(1,2,3,4,5);
-    }
-    /**
-     * Retrieves the number of players selected by the user.
-     * @return The number of players selected by the user.
-     */
-    public Integer getNumPlayers(){
-        return numPLayers.getSelectionModel().getSelectedItem();
+        numPLayers.getItems().addAll(1, 2, 3, 4, 5);
     }
 
+    /**
+     * Retrieves the number of players selected by the user.
+     *
+     * @return The number of players selected by the user.
+     */
+    public Integer getNumPlayers() {
+        return numPLayers.getSelectionModel().getSelectedItem();
+    }
 }

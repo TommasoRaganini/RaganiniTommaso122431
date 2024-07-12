@@ -40,7 +40,7 @@ public class GameLauncher {
      * Constructs a GameLauncher with a specified UI updater and move listener.
      * Initializes the game environment including the track, players, and game checker.
      *
-     * @param updater The interface for updating the game UI.
+     * @param updater      The interface for updating the game UI.
      * @param moveListener The listener for player moves.
      */
     public GameLauncher(GameUIUpdater updater, MoveListener moveListener) {
@@ -49,11 +49,16 @@ public class GameLauncher {
         IChecker checker = new GameChecker(players);
         this.game = new Game(updater, track, checker, players);
     }
+
     /**
      * This method launches the game
      */
     public void launchGame() {
-        game.startGame();
+        try {
+            game.startGame();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

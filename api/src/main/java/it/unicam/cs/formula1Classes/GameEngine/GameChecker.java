@@ -35,7 +35,10 @@ import java.util.Map;
  */
 public class GameChecker implements IChecker {
     private final Player[] players;
-
+    /**
+     * The constructor of the class GameChecker
+     * @param players the players playing the game
+     */
     public GameChecker(Player[] players) {
         this.players = players;
     }
@@ -64,14 +67,14 @@ public class GameChecker implements IChecker {
      */
     public List<Directions> getValidMoves(Player c, IRaceTrack track) {
         List<Directions> validMoves = new ArrayList<>();
-        int[] module = c.getCar().getVector().getModule();
+        int[] movementVector = c.getCar().getVector().getModule();
         int y = c.getCarCoordinates()[0];
         int x = c.getCarCoordinates()[1];
+
         for (Map.Entry<Directions, int[]> entry : DirectionVector.getMap().entrySet()) {
-            int[] direction = entry.getValue();
-            int newY = y + direction[0] + module[0];
-            int newX = x + direction[1] + module[1];
-            if (isValidMove(c,track, newY, newX)) {
+            int newY = y + entry.getValue()[0] + movementVector[0];
+            int newX = x + entry.getValue()[1] + movementVector[1];
+            if (isValidMove(c, track, newY, newX)) {
                 validMoves.add(entry.getKey());
             }
         }

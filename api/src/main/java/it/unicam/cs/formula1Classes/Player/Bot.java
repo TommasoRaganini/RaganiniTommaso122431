@@ -37,14 +37,16 @@ public class Bot extends Player {
     private final Random random;
     private static int idBot = 1;
 
+    /**
+     * Creates a bot player with a car object.
+     *
+     * @param car The car object representing the bot player.
+     */
     public Bot(Car car) {
         super(car, idBot++);
         this.random = new Random();
     }
 
-    public Car getCar() {
-        return super.getCar();
-    }
     /**
      * Performs a move for the bot based on a random selection from the available moves.
      * The move is executed by updating the bot's car position.
@@ -54,20 +56,21 @@ public class Bot extends Player {
      */
     @Override
     public void move(List<Directions> moves, GameUIUpdater updater) {
-        if(checkAllowedMoves(moves))
+        if (checkAllowedMoves(moves))
             return;
         Directions[] directions = moves.toArray(new Directions[0]);
         Directions randomDirection = directions[random.nextInt(directions.length)];
         super.getCar().move(randomDirection);
     }
+
     /**
      * Overloaded move method for testing purposes.
      * Performs a move based on a random selection from the available moves without updating the game UI.
      *
      * @param moves A list of possible directions the bot can move.
      */
-    public void move(List<Directions> moves){
-        if(moves.isEmpty()) {
+    public void move(List<Directions> moves) {
+        if (moves.isEmpty()) {
             super.getCar().getVector().setModule(0, 0);
             return;
         }
@@ -75,6 +78,7 @@ public class Bot extends Player {
         Directions randomDirection = directions[random.nextInt(directions.length)];
         super.getCar().move(randomDirection);
     }
+
 
     @Override
     public String toString() {

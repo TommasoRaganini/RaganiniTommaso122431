@@ -34,13 +34,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-
+/**
+ * JavaFX App
+ */
 public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/it/unicam/cs/formula1Classes/TemplateGame.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 600);
+        Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Formula 1 Game");
         stage.setScene(scene);
         stage.show();

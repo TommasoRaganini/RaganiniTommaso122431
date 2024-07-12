@@ -49,9 +49,8 @@ public class NormalRoundStrategy implements GameStrategy {
      */
     @Override
     public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
-        // Logica per i round successivi al primo
         List<Directions> moves = checker.getValidMoves(player, track);
-        if(player instanceof HumanPlayer){
+        if (player instanceof HumanPlayer) {
             updater.updateMovesChoiceBox(moves);
         }
         player.move(moves, updater);

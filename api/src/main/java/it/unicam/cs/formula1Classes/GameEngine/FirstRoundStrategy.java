@@ -41,14 +41,14 @@ public class FirstRoundStrategy implements GameStrategy {
      * This method updates the available moves to a specific direction (RIGHT),
      * moves the player in that direction, and updates the game UI accordingly.
      *
-     * @param player The player taking the turn.
+     * @param player  The player taking the turn.
      * @param updater The interface for updating the game UI.
-     * @param track The racetrack where the game takes place.
+     * @param track   The racetrack where the game takes place.
      * @param checker The checker used to determine game outcomes.
      * @param players The array of all players participating in the game.
      */
     @Override
-    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker,Player[] players) {
+    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
         updater.updateMovesChoiceBox(List.of(Directions.RIGHT));
         player.move(List.of(Directions.RIGHT), updater);
         updater.updateTrackUI(track.getTrack(), players);

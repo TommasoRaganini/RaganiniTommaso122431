@@ -35,6 +35,7 @@ import java.util.Map;
 public abstract class DirectionVector {
     private final int[] module;
     private static final Map<Directions, int[]> directionMap = new EnumMap<>(Directions.class);
+
     static {
         directionMap.put(Directions.UP, new int[]{-1, 0});
         directionMap.put(Directions.UP_RIGHT, new int[]{-1, 1});
@@ -46,6 +47,7 @@ public abstract class DirectionVector {
         directionMap.put(Directions.RIGHT, new int[]{0, 1});
         directionMap.put(Directions.CENTER, new int[]{0, 0});
     }
+
     /**
      * Constructs a new DirectionVector with an initial module vector pointing to the center (0,0).
      */
@@ -53,29 +55,44 @@ public abstract class DirectionVector {
         this.module = new int[]{0, 0};
     }
 
-
+    /**
+     * Provides the module vector of the car.
+     *
+     * @return the module vector of the car
+     */
     public int[] getModule() {
         return module;
     }
-
+    /**
+     * Sets the module vector of the car.
+     *
+     * @param y the y coordinate of the car
+     * @param x the x coordinate of the car
+     */
     public void setModule(int y, int x) {
         this.module[0] = y;
         this.module[1] = x;
     }
 
-    /**Updates the module vector of the car by moving it in the specified direction.
+    /**
+     * Updates the module vector of the car by moving it in the specified direction.
+     *
      * @param direction the direction of the movement
      * @return the new module of the vector
      */
     public int[] updateModule(Directions direction) {
         int[] d = directionMap.get(direction);
-        if(d == null)
+        if (d == null)
             return this.module;
         this.module[0] += d[0];
         this.module[1] += d[1];
         return this.module;
     }
-
+    /**
+     * Returns the map of the directions
+     *
+     * @return the map of the directions
+     */
     public static Map<Directions, int[]> getMap() {
         return directionMap;
     }

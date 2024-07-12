@@ -31,7 +31,7 @@ import it.unicam.cs.formula1Classes.Player.Directions;
  * This class listens for move selections and notifies other components when a move has been selected.
  * It implements the {@link MoveListener} interface to receive move selection events.
  */
-public class MoveViewController implements MoveListener{
+public class MoveViewController implements MoveListener {
     private Directions direction;
     private volatile boolean isMoveSelected = false;
 
@@ -64,8 +64,13 @@ public class MoveViewController implements MoveListener{
         }
         isMoveSelected = false; // Reset per la prossima mossa
     }
-
-    public Directions getDirection(){
+    /**
+     * Retrieves the current direction selected by the player.
+     * This method allows querying the last known direction that was selected.
+     *
+     * @return The current direction selected by the player.
+     */
+    public Directions getDirection() {
         return direction;
     }
 

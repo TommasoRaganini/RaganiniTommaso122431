@@ -60,7 +60,7 @@ public class Bot extends Player {
             return;
         Directions[] directions = moves.toArray(new Directions[0]);
         Directions randomDirection = directions[random.nextInt(directions.length)];
-        super.getCar().move(randomDirection);
+        getCar().move(randomDirection);
     }
 
     /**

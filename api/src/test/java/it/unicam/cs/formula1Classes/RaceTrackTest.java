@@ -43,8 +43,8 @@ class RaceTrackTest {
     @Test
     void setTrackPositionElement() {
         RaceTrack raceTrack = new RaceTrack();
-        raceTrack.setTrackPositionElement(0,0,"*");
-        assertEquals("*",raceTrack.getTrackPositionElement(0,0));
+        raceTrack.setTrackPositionElement(0,0,"P");
+        assertEquals("P",raceTrack.getTrackPositionElement(0,0));
     }
 
 

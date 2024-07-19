@@ -84,7 +84,7 @@ public class RaceTrack implements IRaceTrack {
     }
 
     /**
-     * Set the element in the cell specified by the given row and column.
+     * Set the element in the cell specified by the given row and column. Only used for testing
      * @param row    the row to set
      * @param column the column to set
      * @param value  the value to insert in the cell

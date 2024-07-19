@@ -44,7 +44,7 @@ public class Util {
      * @param pane        The pane on which the track is to be drawn.
      */
     public static void drawTrack(String[][] trackMatrix, Pane pane) {
-        pane.getChildren().clear(); // Pulisce il pane prima di disegnare il nuovo tracciato
+        pane.getChildren().clear();
         for (int i = 0; i < trackMatrix.length; i++) {
             for (int j = 0; j < trackMatrix[i].length; j++) {
                 InsertCellColor(trackMatrix, pane, j, i);

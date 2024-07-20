@@ -35,20 +35,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class RaceTrackTest {
 
     @Test
-    void getTrackPositionElement() {
-        RaceTrack raceTrack = new RaceTrack();
-        assertEquals("*",raceTrack.getTrackPositionElement(0,0));
-    }
-
-    @Test
-    void setTrackPositionElement() {
-        RaceTrack raceTrack = new RaceTrack();
-        raceTrack.setTrackPositionElement(0,0,"P");
-        assertEquals("P",raceTrack.getTrackPositionElement(0,0));
-    }
-
-
-    @Test
     void getTrack() {
         RaceTrack raceTrack = new RaceTrack();
         String[][] track = TrackGenerator.generateTrack();

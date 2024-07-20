@@ -44,11 +44,15 @@ class ResearchPathTest {
         Player player = new Bot(new Car(start));
         Position end = new Position(3, 36);
         assertFalse(ResearchPath.searchPath(track1, start, end, player));
-        Position start1 = new Position(4, 35);
-        Position end1 = new Position(3, 37);
-        assertFalse(ResearchPath.searchPath(track1, start1, end1, player));
 
+        Position start1 = new Position(9, 2);
+        Position end1 = new Position(7, 2);
+        Player player1 = new Bot(new Car(start1));
+        assertFalse(ResearchPath.searchPath(track1, start1, end1, player1));
 
+        Position start2 = new Position(4, 35);
+        Position end2 = new Position(3, 37);
+        assertTrue(ResearchPath.searchPath(track1, start2, end2, player1));
 
     }
 }

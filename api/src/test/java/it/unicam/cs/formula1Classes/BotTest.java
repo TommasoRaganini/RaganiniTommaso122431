@@ -45,6 +45,7 @@ class BotTest {
         GameChecker gameChecker = new GameChecker(players);
         RaceTrack track = new RaceTrack();
         List<Directions> moves = gameChecker.getValidMoves(players[0],track);
+        assertNotNull(moves);
         for(Directions d : moves){
             System.out.println(d);
         }
@@ -55,6 +56,7 @@ class BotTest {
         RaceTrack track2 = new RaceTrack();
         GameChecker gameChecker2 = new GameChecker(players2);
         List<Directions> moves2 = gameChecker2.getValidMoves(players2[0],track2);
+        assertNotNull(moves2);
         for(Directions d : moves2){
             System.out.println(d);
         }

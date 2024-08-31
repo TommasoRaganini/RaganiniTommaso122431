@@ -52,4 +52,5 @@ public interface IChecker {
      */
     List<Directions> getValidMoves(Player p, IRaceTrack t);
 
+    Player[] players();
 }

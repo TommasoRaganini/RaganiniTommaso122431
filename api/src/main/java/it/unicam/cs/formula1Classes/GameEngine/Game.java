@@ -33,7 +33,6 @@ import it.unicam.cs.formula1Classes.Track.IRaceTrack;
  * track updates, and determining the game outcome.
  */
 public class Game {
-    private final Player[] players;
     private final IRaceTrack track;
     private final IChecker checker;
     private final GameUIUpdater updater;
@@ -48,11 +47,10 @@ public class Game {
      * @param updater The interface for updating the game UI.
      * @param track   The racetrack where the game takes place.
      * @param checker The checker used to determine game outcomes.
-     * @param players The array of players participating in the game.
+     *
      */
-    public Game(GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
+    public Game(GameUIUpdater updater, IRaceTrack track, IChecker checker) {
         this.track = track;
-        this.players = players;
         this.checker = checker;
         this.updater = updater;
     }
@@ -63,7 +61,7 @@ public class Game {
      * and plays rounds until a win condition is met.
      */
     public void startGame() {
-        updater.updateTrackUI(track.getTrack(), players);
+        updater.updateTrackUI(track.getTrack(), checker.players());
         while (!endGame) {
             if (round < FIRST_ROUND_CONTROL) {
                 currentStrategy = new FirstRoundStrategy();
@@ -80,8 +78,8 @@ public class Game {
      * Checks for a win condition after each player's turn and updates the UI if a winner is found.
      */
     private void playRound() {
-        for (Player player : players) {
-            currentStrategy.playRound(player, updater, track, checker, players);
+        for (Player player : checker.players()) {
+            currentStrategy.playRound(player, updater, track, checker);
             endGame = checker.checkWin(player, track, round);
             if (endGame) {
                 updater.updateWinnerUI(player);

@@ -41,7 +41,7 @@ public interface GameStrategy {
      * @param updater Interface for updating the game UI to reflect changes.
      * @param track   The racetrack where the game is taking place.
      * @param checker The checker used to determine game outcomes.
-     * @param players The array of all players participating in the game.
+     *
      */
-    void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players);
+    void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker);
 }

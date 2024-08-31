@@ -45,15 +45,15 @@ public class NormalRoundStrategy implements GameStrategy {
      * @param updater An instance of {@link GameUIUpdater} used to update the game's UI elements.
      * @param track   The racetrack on which the game is being played, providing context for valid moves.
      * @param checker An instance of {@link IChecker} used to determine valid moves for the player.
-     * @param players An array of all players in the game, used for updating the track UI.
+     *
      */
     @Override
-    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
+    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker) {
         List<Directions> moves = checker.getValidMoves(player, track);
         if (player instanceof HumanPlayer) {
             updater.updateMovesChoiceBox(moves);
         }
         player.move(moves, updater);
-        updater.updateTrackUI(track.getTrack(), players);
+        updater.updateTrackUI(track.getTrack(), checker.players());
     }
 }

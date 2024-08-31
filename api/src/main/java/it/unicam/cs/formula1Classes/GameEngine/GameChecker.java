@@ -29,18 +29,17 @@ import it.unicam.cs.formula1Classes.Track.IRaceTrack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 /**
- * This class implements the IChecker interface and is responsible
+ * This class is a record that implements the IChecker interface and is responsible
  * for checking the  status of the game
+ * @param players the players playing the game
  */
-public class GameChecker implements IChecker {
-    private final Player[] players;
+public record GameChecker(Player[] players) implements IChecker {
     /**
-     * The constructor of the class GameChecker
-     * @param players the players playing the game
+     * Constructs a new GameChecker instance with the specified players
      */
-    public GameChecker(Player[] players) {
-        this.players = players;
+    public GameChecker {
     }
 
     /**
@@ -49,8 +48,8 @@ public class GameChecker implements IChecker {
      * @param p the player that is being checked
      * @return true if the game is over, false otherwise
      */
-    public boolean checkWin(Player p, IRaceTrack track,int round) {
-        if(round > 1){
+    public boolean checkWin(Player p, IRaceTrack track, int round) {
+        if (round > 1) {
             Position p1 = p.getCar().getPosition();
             Position p2 = p.getCar().getPath().get(p.getCar().getPath().size() - 2);
 
@@ -89,7 +88,7 @@ public class GameChecker implements IChecker {
      * @param newX the x coordinate of the car
      * @return true if the move is valid, false otherwise
      */
-    private boolean isValidMove(Player p,IRaceTrack track, int newY, int newX) {
+    private boolean isValidMove(Player p, IRaceTrack track, int newY, int newX) {
         for (Player player : players) {
             if (!(player.equals(p)) && player.getCarCoordinates()[0] == newY && player.getCarCoordinates()[1] == newX) {
                 return false;
@@ -98,5 +97,4 @@ public class GameChecker implements IChecker {
         return newY >= 0 && newY < track.getRows() && newX >= 0
                 && newX < track.getColumns() && !(track.getTrack()[newY][newX].equals("*"));
     }
-
 }

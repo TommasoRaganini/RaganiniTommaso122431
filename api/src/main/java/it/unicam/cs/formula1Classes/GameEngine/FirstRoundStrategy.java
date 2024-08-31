@@ -45,12 +45,12 @@ public class FirstRoundStrategy implements GameStrategy {
      * @param updater The interface for updating the game UI.
      * @param track   The racetrack where the game takes place.
      * @param checker The checker used to determine game outcomes.
-     * @param players The array of all players participating in the game.
+     *
      */
     @Override
-    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker, Player[] players) {
+    public void playRound(Player player, GameUIUpdater updater, IRaceTrack track, IChecker checker) {
         updater.updateMovesChoiceBox(List.of(Directions.RIGHT));
         player.move(List.of(Directions.RIGHT), updater);
-        updater.updateTrackUI(track.getTrack(), players);
+        updater.updateTrackUI(track.getTrack(), checker.players());
     }
 }

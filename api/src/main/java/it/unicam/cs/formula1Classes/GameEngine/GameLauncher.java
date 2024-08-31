@@ -47,7 +47,7 @@ public class GameLauncher {
         IRaceTrack track = new RaceTrack();
         Player[] players = new GameSetup(updater).initGame(moveListener);
         IChecker checker = new GameChecker(players);
-        this.game = new Game(updater, track, checker, players);
+        this.game = new Game(updater, track, checker);
     }
 
     /**
